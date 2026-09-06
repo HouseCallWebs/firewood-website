@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #130d0a;
+  --surface: #1b130e;
+  --card: #211710;
+  --border: rgba(255,237,213,0.07);
+  --ember: #e8590c;
+  --ember-light: #f2994a;
+  --spark: #fbbf24;
+  --pine: #3f6b4a;
+  --pine-light: #6b9e78;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .display-font {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+/* Floating ember-orb animations */
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(40px, -60px) scale(1.06); }
+  66%       { transform: translate(-30px, 30px) scale(0.94); }
+}
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-50px, 40px) scale(1.08); }
+  66%       { transform: translate(35px, -45px) scale(0.92); }
+}
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(20px, 25px) scale(1.04); }
+}
+
+.orb-1 { animation: float-1 22s ease-in-out infinite; }
+.orb-2 { animation: float-2 28s ease-in-out infinite; }
+.orb-3 { animation: float-3 18s ease-in-out infinite; }
+
+/* Hide expensive blur orbs on mobile — not visible at small sizes anyway */
+@media (max-width: 768px) {
+  .hero-orbs, .pricing-orbs { display: none; }
+}
+
+/* Hero entrance animations — CSS-only, no JS required */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-fade-1 { animation: fadeInUp 0.7s ease-out 0.10s both; }
+.hero-fade-2 { animation: fadeInUp 0.7s ease-out 0.20s both; }
+.hero-fade-3 { animation: fadeInUp 0.7s ease-out 0.32s both; }
+.hero-fade-4 { animation: fadeInUp 0.7s ease-out 0.42s both; }
+.hero-fade-5 { animation: fadeInUp 0.7s ease-out 0.52s both; }
+.hero-fade-6 { animation: fadeInUp 0.7s ease-out 0.60s both; }
+
+/* Section entrance animations — play once on mount, never scroll-triggered */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes revealRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes revealFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.reveal-up    { animation: revealUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.reveal-left  { animation: revealLeft 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.reveal-right { animation: revealRight 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.reveal-fade  { animation: revealFade 0.6s ease both; }
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 30s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Flicker used sparingly on ember accents */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.72; }
+}
+.flicker { animation: flicker 2.4s ease-in-out infinite; }
+
+/* Gradient text utility — ember to spark */
+.gradient-text {
+  background: linear-gradient(135deg, #e8590c, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle wood-grain pattern (fine horizontal grain lines) instead of a tech grid */
+.grain-pattern {
+  background-image:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,237,213,0.025) 0px,
+      rgba(255,237,213,0.025) 1px,
+      transparent 1px,
+      transparent 26px
+    );
+}
