@@ -23,11 +23,10 @@ const steps = [
     price: "Add-ons",
     priceSub: "from $75/mo",
     title: "Supercharge Your Results",
-    desc: "Layer on powerful add-ons — Local SEO, missed call text-back, review automation, AI receptionist, and more. Pick what fits your budget. Cancel anytime.",
+    desc: "Layer on powerful add-ons — Local SEO, Google Business Profile, delivery CRM, AI receptionist, and more. Pick what fits your budget. Cancel anytime.",
     bullets: [
       "Local SEO to rank for \"firewood near me\"",
-      "Missed call text-back for busy delivery days",
-      "Review request automation",
+      "Google Business Profile optimization",
       "Delivery CRM & repeat-customer pipeline",
       "AI phone receptionist (24/7)",
     ],

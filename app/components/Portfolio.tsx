@@ -82,7 +82,7 @@ export default function Portfolio() {
             </h3>
             <p className="text-white/50 text-sm leading-relaxed max-w-lg">
               Every prospect will soon get a live, personalized demo of their own site —
-              something like <span className="text-white/70 font-mono text-xs">joesfirewood.firewoodwebsite.com</span> —
+              something like <span className="text-white/70 font-mono text-xs">bobsfirewood.firewoodwebsite.com</span> —
               built automatically before you ever sign up. That system is on the way.
               For now, book a call and we&apos;ll walk you through a live build.
             </p>

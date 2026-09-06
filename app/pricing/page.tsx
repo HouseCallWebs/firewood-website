@@ -320,7 +320,7 @@ export default function Pricing() {
               Bundles replace individual add-on selections. Billed {isAnnual ? "annually" : "monthly"} on top of your base plan.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4 max-w-2xl">
               {BUNDLES.map((bundle) => {
                 const on = selectedBundle === bundle.id;
                 const displayPrice = isAnnual
