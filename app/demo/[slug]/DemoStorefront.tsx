@@ -81,8 +81,27 @@ export default function DemoStorefront({ businessName }: Props) {
       </header>
 
       {/* Hero */}
-      <section className="relative px-6 pt-20 pb-16 text-center">
-        <div className="max-w-3xl mx-auto">
+      <section className="relative px-6 pt-20 pb-16 text-center overflow-hidden">
+        {/* Background video — muted/looping footage of firewood being stacked,
+            with a static fallback poster (shown until the video can play, and
+            permanently if it can't) so the hero never shows blank. */}
+        <div className="absolute inset-0">
+          <video
+            className="w-full h-full object-cover"
+            src="https://videos.pexels.com/video-files/4203738/4203738-sd_640_360_30fps.mp4"
+            poster="https://images.unsplash.com/photo-1543784297-b08dbcef46c4?w=1600&q=80&auto=format&fit=crop"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0" style={{
+            background: "linear-gradient(180deg, rgba(19,13,10,0.78) 0%, rgba(19,13,10,0.6) 45%, rgba(19,13,10,0.92) 100%)",
+          }} />
+        </div>
+
+        <div className="max-w-3xl mx-auto relative z-10">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-orange-300 mb-8"
             style={{ background: "rgba(232,89,12,0.10)", borderColor: "rgba(232,89,12,0.25)" }}>
             <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flicker" />

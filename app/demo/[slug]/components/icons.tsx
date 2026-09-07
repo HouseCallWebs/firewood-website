@@ -12,6 +12,11 @@ export function FlameMark({ className }: IconProps) {
         d="M12 2c1.1 3.6-2.4 5-2.4 8.6 0 1.7 1.2 2.9 2.4 2.9s2.4-1 2.4-2.5c0-.9-.4-1.6-.9-2.1.5 1.6 2.4 2.6 2.4 5.4C15.9 17.4 14.1 20 12 20s-4.6-2.4-4.6-5.7c0-4.2 3.4-5.1 4.6-12.3z"
         fill="url(#flameMarkGrad)"
       />
+      <path
+        d="M12 9.6c.5 1.7-1.1 2.4-1.1 4.1 0 .8.6 1.4 1.1 1.4s1.1-.5 1.1-1.2c0-.4-.2-.8-.4-1 .3.8 1.1 1.2 1.1 2.6a2.3 2.3 0 01-4.6 0c0-2 1.7-2.4 2.8-5.9z"
+        fill="#fff4da"
+        fillOpacity="0.55"
+      />
       <defs>
         <linearGradient id="flameMarkGrad" x1="7" y1="2" x2="17" y2="20" gradientUnits="userSpaceOnUse">
           <stop stopColor="#fbbf24" />
