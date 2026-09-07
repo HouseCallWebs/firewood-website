@@ -47,12 +47,12 @@ export default function Reviews({ businessName }: Props) {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Customer reviews</p>
-          <h2 className="display-font text-2xl sm:text-3xl font-bold text-white">What Customers Are Saying</h2>
+          <h2 className="display-font text-2xl sm:text-3xl font-bold text-white">Trusted by Homeowners in Millbrook and Beyond</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {REVIEWS(businessName).map((r) => (
-            <div key={r.name} className="rounded-2xl p-6 border border-white/5 flex flex-col"
+            <div key={r.name} className="rounded-2xl p-6 border border-white/8 flex flex-col"
               style={{ background: "rgba(255,255,255,0.03)" }}>
               <Stars />
               <p className="text-white/70 text-sm leading-relaxed mb-4 flex-1 italic">&ldquo;{r.quote}&rdquo;</p>

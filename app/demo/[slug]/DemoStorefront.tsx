@@ -1,16 +1,25 @@
 "use client";
 import { useState, useMemo } from "react";
+import Logo from "./components/Logo";
+import TrustBarStrip from "./components/TrustBarStrip";
 import UrgencyBanner from "./components/UrgencyBanner";
 import WoodQuality from "./components/WoodQuality";
 import PhotoGallery from "./components/PhotoGallery";
 import DeliveryArea from "./components/DeliveryArea";
 import Reviews from "./components/Reviews";
+import { PhoneIcon } from "./components/icons";
 
 const ROOT_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firewoodwebsite.com";
 
 // Reserved fictional number range (555-0100 to 555-0199) — safe to display,
 // never rings a real line. Swap in the client's real number per demo later.
 const PLACEHOLDER_PHONE = { display: "(555) 010-3070", tel: "+15550103070" };
+
+// Established-business framing — placeholder history in the same spirit as
+// the placeholder reviews and service towns below. Swap for the real story
+// once a client is on board.
+const YEARS_SERVING = 15;
+const HOME_REGION = "the Millbrook area";
 
 // ── Wood species pricing — edit these anytime ───────────────────────────────
 const SPECIES = [
@@ -53,20 +62,14 @@ export default function DemoStorefront({ businessName }: Props) {
     <div style={{ background: "#130d0a", minHeight: "100vh" }}>
       <div className="fixed top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-15 pointer-events-none"
         style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(80px)" }} />
-      <div className="fixed bottom-[10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #3f6b4a 0%, transparent 65%)", filter: "blur(80px)" }} />
+      <div className="fixed bottom-[10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-8 pointer-events-none"
+        style={{ background: "radial-gradient(circle, #7a4a24 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="grain-pattern fixed inset-0 pointer-events-none" />
 
       {/* Header — this business's own branding, not Firewood Website's */}
       <header className="relative border-b border-white/5 px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
-              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
-              🔥
-            </div>
-            <span className="display-font font-bold text-lg text-white tracking-tight">{businessName}</span>
-          </div>
+          <Logo businessName={businessName} />
           <a
             href="#quote"
             className="text-sm font-bold px-5 py-2.5 rounded-xl text-black transition-all hover:scale-105 hover:brightness-110"
@@ -83,14 +86,14 @@ export default function DemoStorefront({ businessName }: Props) {
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-orange-300 mb-8"
             style={{ background: "rgba(232,89,12,0.10)", borderColor: "rgba(232,89,12,0.25)" }}>
             <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flicker" />
-            Seasoned Hardwood · Delivered Fast
+            Family-Owned &amp; Operated
           </span>
           <h1 className="display-font text-4xl sm:text-5xl font-bold leading-[1.08] tracking-tight text-white mb-6">
             {businessName}
           </h1>
-          <p className="text-base sm:text-lg text-white/50 max-w-xl mx-auto leading-relaxed mb-8">
-            Kiln-dried and seasoned hardwood, delivered and stacked on your schedule.
-            Get an instant quote below — no calls, no waiting.
+          <p className="text-base sm:text-lg text-white/55 max-w-xl mx-auto leading-relaxed mb-8">
+            Serving {HOME_REGION} for {YEARS_SERVING}+ years. Every cord is split and
+            seasoned — never green — and delivered on your schedule.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -105,12 +108,14 @@ export default function DemoStorefront({ businessName }: Props) {
               href={`tel:${PLACEHOLDER_PHONE.tel}`}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white border-2 border-white/15 hover:border-white/30 hover:bg-white/5 transition-all"
             >
-              📞 Call {PLACEHOLDER_PHONE.display}
+              <PhoneIcon className="w-4 h-4" />
+              Call {PLACEHOLDER_PHONE.display}
             </a>
           </div>
         </div>
       </section>
 
+      <TrustBarStrip />
       <UrgencyBanner />
 
       {/* Instant quote calculator */}
@@ -118,7 +123,7 @@ export default function DemoStorefront({ businessName }: Props) {
         <div className="max-w-2xl mx-auto rounded-3xl border border-white/8 p-8"
           style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)" }}>
           <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Instant quote</p>
-          <h2 className="text-white font-bold text-2xl mb-7">Get Your Price</h2>
+          <h2 className="display-font text-white font-bold text-2xl mb-7">Get Your Price</h2>
 
           <label className="block text-xs font-medium text-white/40 mb-2">Wood Species</label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -233,10 +238,10 @@ export default function DemoStorefront({ businessName }: Props) {
       <section className="relative px-6 py-20 text-center">
         <div className="max-w-xl mx-auto">
           <h2 className="display-font text-3xl sm:text-4xl font-bold text-white mb-4">
-            Ready When You Are.
+            Firewood You Can Count On.
           </h2>
-          <p className="text-white/50 mb-8">
-            Get an instant quote or give us a call — either way, your firewood ships this week.
+          <p className="text-white/55 mb-8">
+            Family-owned, locally operated, and ready to deliver — this week.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
@@ -250,7 +255,7 @@ export default function DemoStorefront({ businessName }: Props) {
               href={`tel:${PLACEHOLDER_PHONE.tel}`}
               className="inline-flex flex-col items-center justify-center gap-0.5 px-8 py-3 rounded-xl text-base font-bold text-white border-2 border-white/15 hover:border-white/30 hover:bg-white/5 transition-all"
             >
-              <span>📞 Call Now</span>
+              <span className="inline-flex items-center gap-1.5"><PhoneIcon className="w-4 h-4" /> Call Now</span>
               <span className="text-sm font-normal text-white/60">{PLACEHOLDER_PHONE.display}</span>
             </a>
           </div>
@@ -259,7 +264,10 @@ export default function DemoStorefront({ businessName }: Props) {
 
       {/* Footer */}
       <footer className="relative border-t border-white/5 px-6 py-10 text-center">
-        <p className="text-white/30 text-sm">
+        <p className="text-white/40 text-sm mb-1.5">
+          Family-owned and operated, proudly serving {HOME_REGION}.
+        </p>
+        <p className="text-white/25 text-xs">
           © {new Date().getFullYear()} {businessName}. All rights reserved.
         </p>
       </footer>

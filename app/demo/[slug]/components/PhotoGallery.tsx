@@ -1,7 +1,9 @@
 // Stock photography — swap these for the client's real photos when available.
+// A dark fallback color sits behind every image so a slow or failed load
+// never shows a bare gray box.
 const PHOTOS = [
   { caption: "Freshly Split Oak", image: "https://images.unsplash.com/photo-1571040195944-85a412548a43?w=800&q=80&auto=format&fit=crop" },
-  { caption: "Delivery Day", image: "https://images.unsplash.com/photo-1684426524165-3d80f3277aea?w=800&q=80&auto=format&fit=crop" },
+  { caption: "Fresh Delivery", image: "https://images.unsplash.com/photo-1543784297-b08dbcef46c4?w=800&q=80&auto=format&fit=crop" },
   { caption: "Stacked & Ready", image: "https://images.unsplash.com/photo-1629570584961-6d1ac3ded3d8?w=800&q=80&auto=format&fit=crop" },
 ];
 
@@ -11,14 +13,18 @@ export default function PhotoGallery() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">See the work</p>
-          <h2 className="display-font text-2xl sm:text-3xl font-bold text-white">From Our Yard to Yours</h2>
+          <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-3">From Our Yard to Yours</h2>
+          <p className="text-white/50 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+            Every load comes straight from our yard — split, seasoned, and ready before
+            it ever reaches your driveway.
+          </p>
         </div>
         <div className="grid sm:grid-cols-3 gap-4">
           {PHOTOS.map((p) => (
             <div
               key={p.caption}
               className="relative h-56 rounded-2xl overflow-hidden border border-white/8 bg-cover bg-center"
-              style={{ backgroundImage: `url(${p.image})` }}
+              style={{ backgroundColor: "#211710", backgroundImage: `url(${p.image})` }}
             >
               <div className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
                 style={{ background: "linear-gradient(to top, rgba(10,7,5,0.9), transparent)" }} />
