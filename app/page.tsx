@@ -6,6 +6,7 @@ import HowItWorks from "./components/HowItWorks";
 import Portfolio from "./components/Portfolio";
 import PricingBanner from "./components/PricingBanner";
 import WhyUs from "./components/WhyUs";
+import AIReceptionistPitch from "./components/AIReceptionistPitch";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <Portfolio />
       <PricingBanner />
       <WhyUs />
+      <AIReceptionistPitch />
       <FinalCTA />
       <Footer />
     </>

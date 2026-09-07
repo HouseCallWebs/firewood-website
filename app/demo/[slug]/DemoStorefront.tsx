@@ -3,59 +3,45 @@ import { useState, useMemo } from "react";
 
 const ROOT_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firewoodwebsite.com";
 
+// ── Wood species pricing — edit these anytime ───────────────────────────────
+const SPECIES = [
+  { id: "oak", label: "Oak", pricePerCord: 350 },
+  { id: "pine", label: "Pine", pricePerCord: 220 },
+  { id: "cedar", label: "Cedar", pricePerCord: 300 },
+  { id: "mix", label: "Mix", desc: "Mixed hardwood", pricePerCord: 275 },
+] as const;
+
+// Cord size sets the quantity (as a fraction of a full cord) that the
+// selected species' per-cord price is multiplied by.
 const CORD_SIZES = [
-  { id: "quarter", label: "Quarter Cord", desc: "~2ft x 4ft x 8ft stacked", price: 125 },
-  { id: "half", label: "Half Cord", desc: "~4ft x 4ft x 8ft stacked", price: 225 },
-  { id: "full", label: "Full Cord", desc: "~8ft x 4ft x 8ft stacked", price: 400 },
+  { id: "quarter", label: "Quarter Cord", desc: "~2ft x 4ft x 8ft stacked", quantity: 0.25 },
+  { id: "half", label: "Half Cord", desc: "~4ft x 4ft x 8ft stacked", quantity: 0.5 },
+  { id: "full", label: "Full Cord", desc: "~8ft x 4ft x 8ft stacked", quantity: 1 },
 ] as const;
 
 const STACKING_FEE = 40;
-
-const TRANSCRIPT = (businessName: string) => [
-  { speaker: "caller", text: "Hi, do you guys deliver firewood out to Millbrook?" },
-  {
-    speaker: "ai",
-    text: `Yes we do! Thanks for calling ${businessName} — we deliver to Millbrook and most of the surrounding area. Are you looking for a half cord or a full cord?`,
-  },
-  { speaker: "caller", text: "Probably a half cord. Do you stack it too?" },
-  {
-    speaker: "ai",
-    text: "We do — stacking is a flat $40 add-on. I can get you on the schedule for this week. Can I grab your name and address?",
-  },
-  { speaker: "caller", text: "Sure, it's Dana Ruiz, 214 Millbrook Rd." },
-  {
-    speaker: "ai",
-    text: `Got it, Dana — I've texted you a confirmation and a link to finalize payment. Thanks for calling ${businessName}!`,
-  },
-];
 
 interface Props {
   slug: string;
   businessName: string;
 }
 
-export default function DemoStorefront({ slug, businessName }: Props) {
+export default function DemoStorefront({ businessName }: Props) {
+  const [species, setSpecies] = useState<(typeof SPECIES)[number]["id"]>("oak");
   const [cordSize, setCordSize] = useState<(typeof CORD_SIZES)[number]["id"]>("half");
   const [zip, setZip] = useState("");
   const [stacking, setStacking] = useState(false);
 
-  const selected = CORD_SIZES.find((c) => c.id === cordSize)!;
-  const total = useMemo(() => selected.price + (stacking ? STACKING_FEE : 0), [selected, stacking]);
+  const selectedSpecies = SPECIES.find((s) => s.id === species)!;
+  const selectedCord = CORD_SIZES.find((c) => c.id === cordSize)!;
+  const woodTotal = useMemo(
+    () => Math.round(selectedSpecies.pricePerCord * selectedCord.quantity),
+    [selectedSpecies, selectedCord]
+  );
+  const total = woodTotal + (stacking ? STACKING_FEE : 0);
 
   return (
     <div style={{ background: "#130d0a", minHeight: "100vh" }}>
-      {/* Demo disclosure ribbon — always visible so nobody mistakes this for a real business */}
-      <div className="sticky top-0 z-50 px-4 py-2.5 text-center text-xs font-semibold flex flex-wrap items-center justify-center gap-2"
-        style={{ background: "#3f6b4a", color: "#eafff0" }}>
-        <span>👀 Live demo preview built for {businessName} — not a real business.</span>
-        <a
-          href={`${ROOT_URL}/contact`}
-          className="underline underline-offset-2 font-bold hover:opacity-80 transition-opacity"
-        >
-          Get a site like this for your business →
-        </a>
-      </div>
-
       <div className="fixed top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-15 pointer-events-none"
         style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="fixed bottom-[10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-10 pointer-events-none"
@@ -101,15 +87,38 @@ export default function DemoStorefront({ slug, businessName }: Props) {
       </section>
 
       {/* Instant quote calculator */}
-      <section id="quote" className="relative px-6 pb-20">
+      <section id="quote" className="relative px-6 pb-24">
         <div className="max-w-2xl mx-auto rounded-3xl border border-white/8 p-8"
           style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)" }}>
           <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Instant quote</p>
           <h2 className="text-white font-bold text-2xl mb-7">Get Your Price</h2>
 
+          <label className="block text-xs font-medium text-white/40 mb-2">Wood Species</label>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            {SPECIES.map((s) => {
+              const on = species === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => setSpecies(s.id)}
+                  className={`rounded-2xl border p-3 text-left transition-all duration-150 ${
+                    on ? "border-orange-400/70" : "border-white/8 hover:border-white/20"
+                  }`}
+                  style={{ background: on ? "rgba(232,89,12,0.08)" : "rgba(255,255,255,0.02)" }}
+                >
+                  <p className={`font-bold text-sm mb-0.5 ${on ? "text-white" : "text-white/70"}`}>{s.label}</p>
+                  {"desc" in s && s.desc && <p className="text-white/30 text-[11px] mb-2">{s.desc}</p>}
+                  <p className={`text-sm font-black ${on ? "gradient-text" : "text-white/40"}`}>${s.pricePerCord}/cord</p>
+                </button>
+              );
+            })}
+          </div>
+
+          <label className="block text-xs font-medium text-white/40 mb-2">Cord Quantity</label>
           <div className="grid sm:grid-cols-3 gap-3 mb-6">
             {CORD_SIZES.map((c) => {
               const on = cordSize === c.id;
+              const priceForCard = Math.round(selectedSpecies.pricePerCord * c.quantity);
               return (
                 <button
                   key={c.id}
@@ -121,7 +130,7 @@ export default function DemoStorefront({ slug, businessName }: Props) {
                 >
                   <p className={`font-bold text-sm mb-1 ${on ? "text-white" : "text-white/70"}`}>{c.label}</p>
                   <p className="text-white/35 text-xs mb-3">{c.desc}</p>
-                  <p className={`text-xl font-black ${on ? "gradient-text" : "text-white/50"}`}>${c.price}</p>
+                  <p className={`text-xl font-black ${on ? "gradient-text" : "text-white/50"}`}>${priceForCard}</p>
                 </button>
               );
             })}
@@ -170,7 +179,7 @@ export default function DemoStorefront({ slug, businessName }: Props) {
             <div>
               <p className="text-white/40 text-xs mb-1">Your instant quote</p>
               <p className="text-white/55 text-sm">
-                {selected.label}{stacking ? " + stacking" : ""}
+                {selectedCord.label} of {selectedSpecies.label}{stacking ? " + stacking" : ""}
               </p>
             </div>
             <div className="text-right">
@@ -188,55 +197,11 @@ export default function DemoStorefront({ slug, businessName }: Props) {
         </div>
       </section>
 
-      {/* Mock AI receptionist transcript */}
-      <section className="relative px-6 pb-24">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2 text-center">AI phone receptionist</p>
-          <h2 className="text-white font-bold text-2xl mb-2 text-center">Never Miss a Call Again</h2>
-          <p className="text-white/40 text-sm mb-8 text-center max-w-md mx-auto">
-            Here&apos;s a sample of what a real call to {businessName} sounds like with the AI receptionist add-on answering.
-          </p>
-
-          <div className="rounded-3xl border border-white/8 p-6 space-y-3" style={{ background: "rgba(255,255,255,0.03)" }}>
-            <div className="flex items-center gap-2 pb-3 mb-1 border-b border-white/6">
-              <span className="w-2 h-2 rounded-full bg-green-400 flicker" />
-              <span className="text-xs text-white/40 font-mono">Incoming call transcript — simulated</span>
-            </div>
-            {TRANSCRIPT(businessName).map((line, i) => (
-              <div key={i} className={`flex ${line.speaker === "ai" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                    line.speaker === "ai" ? "text-black" : "text-white/75"
-                  }`}
-                  style={
-                    line.speaker === "ai"
-                      ? { background: "linear-gradient(135deg, #e8590c, #fbbf24)" }
-                      : { background: "rgba(255,255,255,0.06)" }
-                  }
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-wide opacity-60 mb-1">
-                    {line.speaker === "ai" ? `${businessName} AI Receptionist` : "Caller"}
-                  </p>
-                  {line.text}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer — ties back to the real sales site */}
+      {/* Footer */}
       <footer className="relative border-t border-white/5 px-6 py-10 text-center">
-        <p className="text-white/30 text-sm mb-4">
-          This preview was generated automatically from the subdomain{" "}
-          <span className="font-mono text-white/50">{slug}.firewoodwebsite.com</span> — no setup required.
+        <p className="text-white/30 text-sm">
+          © {new Date().getFullYear()} {businessName}. All rights reserved.
         </p>
-        <a
-          href={`${ROOT_URL}/contact`}
-          className="inline-flex items-center gap-2 text-sm font-bold text-orange-400 hover:text-orange-300 transition-colors"
-        >
-          Want this for your business? Get started →
-        </a>
       </footer>
     </div>
   );
