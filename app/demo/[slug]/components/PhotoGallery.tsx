@@ -1,7 +1,8 @@
+// Stock photography — swap these for the client's real photos when available.
 const PHOTOS = [
-  { icon: "🪵", caption: "Freshly Split Oak", gradient: "linear-gradient(135deg, #3d2412, #7a3d16)" },
-  { icon: "🚚", caption: "On the Road", gradient: "linear-gradient(135deg, #24211b, #4a3d20)" },
-  { icon: "🏡", caption: "Stacked & Ready", gradient: "linear-gradient(135deg, #1f2a1c, #3f5a34)" },
+  { caption: "Freshly Split Oak", image: "https://images.unsplash.com/photo-1571040195944-85a412548a43?w=800&q=80&auto=format&fit=crop" },
+  { caption: "On the Road", image: "https://images.unsplash.com/photo-1543784297-b08dbcef46c4?w=800&q=80&auto=format&fit=crop" },
+  { caption: "Stacked & Ready", image: "https://images.unsplash.com/photo-1629570584961-6d1ac3ded3d8?w=800&q=80&auto=format&fit=crop" },
 ];
 
 export default function PhotoGallery() {
@@ -14,13 +15,14 @@ export default function PhotoGallery() {
         </div>
         <div className="grid sm:grid-cols-3 gap-4">
           {PHOTOS.map((p) => (
-            <div key={p.caption} className="rounded-2xl overflow-hidden border border-white/8">
-              <div className="h-40 flex items-center justify-center text-5xl" style={{ background: p.gradient }}>
-                {p.icon}
-              </div>
-              <div className="px-4 py-3" style={{ background: "rgba(255,255,255,0.03)" }}>
-                <p className="text-white/70 text-sm font-medium">{p.caption}</p>
-              </div>
+            <div
+              key={p.caption}
+              className="relative h-56 rounded-2xl overflow-hidden border border-white/8 bg-cover bg-center"
+              style={{ backgroundImage: `url(${p.image})` }}
+            >
+              <div className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+                style={{ background: "linear-gradient(to top, rgba(10,7,5,0.9), transparent)" }} />
+              <p className="absolute bottom-3 left-4 text-white text-sm font-medium">{p.caption}</p>
             </div>
           ))}
         </div>

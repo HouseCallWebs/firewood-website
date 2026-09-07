@@ -1,13 +1,9 @@
 const TOWNS = ["Millbrook", "Fairview", "Cedar Grove", "Riverside", "Oakdale", "Pine Hollow", "Maple Heights", "Clearwater"];
 
-// Rough scattered positions (percent) for the static map placeholder pins.
-const PINS = [
-  { top: "28%", left: "22%" },
-  { top: "48%", left: "58%" },
-  { top: "65%", left: "30%" },
-  { top: "22%", left: "68%" },
-  { top: "72%", left: "70%" },
-];
+// The town badges above are fictional (derived from the demo, not a real
+// service area), so the embedded map centers on a real, generic mid-sized
+// US town as a plausible stand-in rather than trying to geocode them.
+const MAP_QUERY = "Springfield, MO";
 
 export default function DeliveryArea() {
   return (
@@ -30,18 +26,16 @@ export default function DeliveryArea() {
           ))}
         </div>
 
-        <div className="relative rounded-2xl border border-white/8 overflow-hidden h-56"
+        <div className="relative rounded-2xl border border-white/8 overflow-hidden h-80"
           style={{ background: "rgba(255,255,255,0.03)" }}>
-          <div className="grain-pattern absolute inset-0 opacity-60" />
-          {PINS.map((pin, i) => (
-            <span key={i} className="absolute text-lg -translate-x-1/2 -translate-y-full" style={{ top: pin.top, left: pin.left }}>
-              📍
-            </span>
-          ))}
-          <div className="absolute bottom-3 right-3 text-[11px] text-white/30 px-2.5 py-1 rounded-full"
-            style={{ background: "rgba(19,13,10,0.6)" }}>
-            Service area map
-          </div>
+          <iframe
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`}
+            className="absolute inset-0 w-full h-full"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Service area map"
+          />
         </div>
         <p className="text-white/25 text-xs text-center mt-3">
           Don&apos;t see your town? Ask us — we&apos;re always expanding our delivery radius.
