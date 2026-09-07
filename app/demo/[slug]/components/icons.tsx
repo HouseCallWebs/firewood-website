@@ -5,20 +5,19 @@
 
 type IconProps = { className?: string };
 
-export function FlameMark({ className }: IconProps) {
+export function CrossedAxesMark({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M12 2c1.1 3.6-2.4 5-2.4 8.6 0 1.7 1.2 2.9 2.4 2.9s2.4-1 2.4-2.5c0-.9-.4-1.6-.9-2.1.5 1.6 2.4 2.6 2.4 5.4C15.9 17.4 14.1 20 12 20s-4.6-2.4-4.6-5.7c0-4.2 3.4-5.1 4.6-12.3z"
-        fill="url(#flameMarkGrad)"
-      />
-      <path
-        d="M12 9.6c.5 1.7-1.1 2.4-1.1 4.1 0 .8.6 1.4 1.1 1.4s1.1-.5 1.1-1.2c0-.4-.2-.8-.4-1 .3.8 1.1 1.2 1.1 2.6a2.3 2.3 0 01-4.6 0c0-2 1.7-2.4 2.8-5.9z"
-        fill="#fff4da"
-        fillOpacity="0.55"
-      />
+      <g transform="rotate(45 12 12)">
+        <rect x="10.8" y="3" width="2.4" height="17" rx="1.2" fill="url(#axesMarkGrad)" />
+        <path d="M6.5 3.2h11l-2.6 5.3h-5.8z" fill="url(#axesMarkGrad)" />
+      </g>
+      <g transform="rotate(-45 12 12)">
+        <rect x="10.8" y="3" width="2.4" height="17" rx="1.2" fill="url(#axesMarkGrad)" />
+        <path d="M6.5 3.2h11l-2.6 5.3h-5.8z" fill="url(#axesMarkGrad)" />
+      </g>
       <defs>
-        <linearGradient id="flameMarkGrad" x1="7" y1="2" x2="17" y2="20" gradientUnits="userSpaceOnUse">
+        <linearGradient id="axesMarkGrad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
           <stop stopColor="#fbbf24" />
           <stop offset="1" stopColor="#e8590c" />
         </linearGradient>

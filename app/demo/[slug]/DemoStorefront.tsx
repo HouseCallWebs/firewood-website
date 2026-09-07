@@ -89,7 +89,7 @@ export default function DemoStorefront({ businessName }: Props) {
           <video
             className="w-full h-full object-cover"
             src="https://videos.pexels.com/video-files/4203738/4203738-sd_640_360_30fps.mp4"
-            poster="https://images.unsplash.com/photo-1543784297-b08dbcef46c4?w=1600&q=80&auto=format&fit=crop"
+            poster="/images/demo/log-truck.jpg"
             autoPlay
             muted
             loop

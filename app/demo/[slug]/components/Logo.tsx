@@ -1,4 +1,4 @@
-import { FlameMark } from "./icons";
+import { CrossedAxesMark } from "./icons";
 
 export default function Logo({ businessName }: { businessName: string }) {
   return (
@@ -7,7 +7,7 @@ export default function Logo({ businessName }: { businessName: string }) {
         className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
         style={{ background: "rgba(232,89,12,0.12)", border: "1px solid rgba(232,89,12,0.3)" }}
       >
-        <FlameMark className="w-5 h-5" />
+        <CrossedAxesMark className="w-6 h-6" />
       </div>
       <div className="leading-tight">
         <span className="display-font font-bold text-lg text-white tracking-tight block">{businessName}</span>

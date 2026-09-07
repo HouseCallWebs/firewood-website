@@ -1,10 +1,11 @@
-// Stock photography — swap these for the client's real photos when available.
-// A dark fallback color sits behind every image so a slow or failed load
+// Stock photography stored locally in /public/images/demo (downloaded from
+// Pixabay, royalty-free) — swap these for the client's real photos when
+// available. A dark fallback color sits behind every image so a slow load
 // never shows a bare gray box.
 const PHOTOS = [
-  { caption: "Freshly Split Oak", image: "https://images.unsplash.com/photo-1571040195944-85a412548a43?w=800&q=80&auto=format&fit=crop" },
-  { caption: "Fresh Delivery", image: "https://images.unsplash.com/photo-1543784297-b08dbcef46c4?w=800&q=80&auto=format&fit=crop" },
-  { caption: "Stacked & Ready", image: "https://images.unsplash.com/photo-1629570584961-6d1ac3ded3d8?w=800&q=80&auto=format&fit=crop" },
+  { caption: "Freshly Split Oak", image: "/images/demo/split-firewood.jpg" },
+  { caption: "Fresh Delivery", image: "/images/demo/log-truck.jpg" },
+  { caption: "Stacked & Ready", image: "/images/demo/stacked-firewood.jpg" },
 ];
 
 export default function PhotoGallery() {
