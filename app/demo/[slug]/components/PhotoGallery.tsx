@@ -1,7 +1,7 @@
 // Stock photography — swap these for the client's real photos when available.
 const PHOTOS = [
   { caption: "Freshly Split Oak", image: "https://images.unsplash.com/photo-1571040195944-85a412548a43?w=800&q=80&auto=format&fit=crop" },
-  { caption: "On the Road", image: "https://images.unsplash.com/photo-1543784297-b08dbcef46c4?w=800&q=80&auto=format&fit=crop" },
+  { caption: "Delivery Day", image: "https://images.unsplash.com/photo-1684426524165-3d80f3277aea?w=800&q=80&auto=format&fit=crop" },
   { caption: "Stacked & Ready", image: "https://images.unsplash.com/photo-1629570584961-6d1ac3ded3d8?w=800&q=80&auto=format&fit=crop" },
 ];
 

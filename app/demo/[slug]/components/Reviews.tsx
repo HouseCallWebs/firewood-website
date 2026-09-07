@@ -23,6 +23,10 @@ const REVIEWS = (businessName: string) => [
     name: "Amanda P.",
     quote: "Quality oak, fast delivery, and the crew was super friendly. Highly recommend.",
   },
+  {
+    name: "Chris B.",
+    quote: "Called in the afternoon and had a full cord dropped off before dinner. Fastest delivery I've ever seen for firewood.",
+  },
 ];
 
 function Stars() {

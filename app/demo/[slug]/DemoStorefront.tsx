@@ -248,9 +248,10 @@ export default function DemoStorefront({ businessName }: Props) {
             </a>
             <a
               href={`tel:${PLACEHOLDER_PHONE.tel}`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white border-2 border-white/15 hover:border-white/30 hover:bg-white/5 transition-all"
+              className="inline-flex flex-col items-center justify-center gap-0.5 px-8 py-3 rounded-xl text-base font-bold text-white border-2 border-white/15 hover:border-white/30 hover:bg-white/5 transition-all"
             >
-              📞 Call {PLACEHOLDER_PHONE.display}
+              <span>📞 Call Now</span>
+              <span className="text-sm font-normal text-white/60">{PLACEHOLDER_PHONE.display}</span>
             </a>
           </div>
         </div>
