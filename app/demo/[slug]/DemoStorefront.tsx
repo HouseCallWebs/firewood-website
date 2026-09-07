@@ -1,7 +1,16 @@
 "use client";
 import { useState, useMemo } from "react";
+import UrgencyBanner from "./components/UrgencyBanner";
+import WoodQuality from "./components/WoodQuality";
+import PhotoGallery from "./components/PhotoGallery";
+import DeliveryArea from "./components/DeliveryArea";
+import Reviews from "./components/Reviews";
 
 const ROOT_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firewoodwebsite.com";
+
+// Reserved fictional number range (555-0100 to 555-0199) — safe to display,
+// never rings a real line. Swap in the client's real number per demo later.
+const PLACEHOLDER_PHONE = { display: "(555) 010-3070", tel: "+15550103070" };
 
 // ── Wood species pricing — edit these anytime ───────────────────────────────
 const SPECIES = [
@@ -79,12 +88,30 @@ export default function DemoStorefront({ businessName }: Props) {
           <h1 className="display-font text-4xl sm:text-5xl font-bold leading-[1.08] tracking-tight text-white mb-6">
             {businessName}
           </h1>
-          <p className="text-base sm:text-lg text-white/50 max-w-xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-white/50 max-w-xl mx-auto leading-relaxed mb-8">
             Kiln-dried and seasoned hardwood, delivered and stacked on your schedule.
             Get an instant quote below — no calls, no waiting.
           </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="#quote"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-all hover:scale-105 hover:brightness-110 shadow-xl"
+              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", boxShadow: "0 0 30px rgba(232,89,12,0.3)" }}
+            >
+              Get Firewood Delivered This Week
+            </a>
+            <a
+              href={`tel:${PLACEHOLDER_PHONE.tel}`}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white border-2 border-white/15 hover:border-white/30 hover:bg-white/5 transition-all"
+            >
+              📞 Call {PLACEHOLDER_PHONE.display}
+            </a>
+          </div>
         </div>
       </section>
+
+      <UrgencyBanner />
 
       {/* Instant quote calculator */}
       <section id="quote" className="relative px-6 pb-24">
@@ -194,6 +221,38 @@ export default function DemoStorefront({ businessName }: Props) {
           >
             Book This Delivery →
           </a>
+        </div>
+      </section>
+
+      <WoodQuality />
+      <PhotoGallery />
+      <DeliveryArea />
+      <Reviews businessName={businessName} />
+
+      {/* Closing CTA */}
+      <section className="relative px-6 py-20 text-center">
+        <div className="max-w-xl mx-auto">
+          <h2 className="display-font text-3xl sm:text-4xl font-bold text-white mb-4">
+            Ready When You Are.
+          </h2>
+          <p className="text-white/50 mb-8">
+            Get an instant quote or give us a call — either way, your firewood ships this week.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="#quote"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-all hover:scale-105 hover:brightness-110 shadow-xl"
+              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", boxShadow: "0 0 30px rgba(232,89,12,0.3)" }}
+            >
+              Get Firewood Delivered This Week
+            </a>
+            <a
+              href={`tel:${PLACEHOLDER_PHONE.tel}`}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white border-2 border-white/15 hover:border-white/30 hover:bg-white/5 transition-all"
+            >
+              📞 Call {PLACEHOLDER_PHONE.display}
+            </a>
+          </div>
         </div>
       </section>
 
