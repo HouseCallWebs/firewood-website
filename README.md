@@ -28,13 +28,23 @@ Copy `.env.local.example` to `.env.local` for local development.
 bundles — both `/pricing` (display) and `/api/checkout/create-subscription`
 (billing) import from it, so they can't drift out of sync.
 
-## Wildcard subdomain demo previews (not built yet)
+## Wildcard subdomain demo previews
 
-The eventual goal is a personalized demo preview per prospect, e.g.
-`joesfirewood.firewoodwebsite.com`. `proxy.ts` has the scaffolding
-(subdomain extraction, matcher config) commented in place — see the comment
-block at the top of that file for the remaining steps once this is ready to
-build.
+Any subdomain other than `www` (e.g. `bobsfirewood.firewoodwebsite.com`) is
+rewritten by `proxy.ts` to `/demo/[slug]`, which renders a personalized
+storefront preview — business name, instant quote calculator, and a mock AI
+receptionist transcript — derived entirely from the slug via
+`lib/subdomain.ts`. No database lookup, so any subdomain works with zero
+manual setup. `firewoodwebsite.com`, `www`, and `localhost` all continue to
+the normal site; `/api/*` is excluded from the rewrite so checkout and
+contact keep working regardless of hostname.
+
+**To go live**: add a wildcard domain (`*.firewoodwebsite.com`) in this
+project's Vercel domain settings, pointed at this same deployment.
+
+**Local testing**: add an entry like `127.0.0.1 bobsfirewood.localhost` to
+`/etc/hosts`, then visit `http://bobsfirewood.localhost:3070` — or just visit
+`http://localhost:3070/demo/bobsfirewood` directly, since it's a real route.
 
 ## Development
 
