@@ -263,10 +263,14 @@ export default function Pricing() {
 
                 <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2">off-season</p>
                 <h3 className="display-font text-xl font-bold text-white mb-3">Off-Season Maintenance</h3>
-                <p className="text-white/45 text-sm leading-relaxed mb-5">
-                  Your site stays live and hosted with no active lead-gen work. Add-ons and
-                  bundles are paused by default — want to keep one running through the
-                  off-season instead? Just say so and we&apos;ll keep it active.
+                <p className="text-white/45 text-sm leading-relaxed mb-3">
+                  We know firewood is seasonal, so let us cut you a break. Just need
+                  maintenance over the summer? We&apos;ve got you covered — your site stays
+                  live and ready for when the cold comes back.
+                </p>
+                <p className="text-white/35 text-xs leading-relaxed mb-5">
+                  Want to keep an add-on running through the off-season? Just say so and
+                  we&apos;ll keep it active.
                 </p>
 
                 <div className="text-4xl font-black text-white/80 leading-none">${OFF_SEASON_PRICE}</div>
