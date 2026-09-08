@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;background:#f9fafb;border-radius:12px;">
-      <div style="background:linear-gradient(135deg,#e8590c,#f2994a);padding:24px 32px;border-radius:8px 8px 0 0;">
+      <div style="background:linear-gradient(135deg,#8b1a0f,#b0271a);padding:24px 32px;border-radius:8px 8px 0 0;">
         <h1 style="color:#000;margin:0;font-size:20px;font-weight:900;">
           🔥 New Quote Request — Firewood Website
         </h1>
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
             <td style="padding:10px 0;color:#111827;font-size:15px;padding-top:14px;">${message}</td>
           </tr>` : ""}
         </table>
-        <div style="margin-top:28px;padding:16px;background:#fff7ed;border-radius:8px;border-left:4px solid #e8590c;">
+        <div style="margin-top:28px;padding:16px;background:#fff7ed;border-radius:8px;border-left:4px solid #8b1a0f;">
           <p style="margin:0;color:#92400e;font-size:13px;">
             📞 <strong>Action required:</strong> Follow up with ${name} at <strong>${phone}</strong> — best time: ${bestTime}.
           </p>

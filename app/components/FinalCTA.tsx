@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-orange-500/50 transition-colors";
+  "w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-[#8b1a0f]/50 transition-colors";
 const inputStyle = { background: "rgba(255,255,255,0.05)" };
 const selectStyle = { background: "#1b130e" };
 
@@ -50,7 +50,7 @@ export default function FinalCTA() {
   return (
     <section id="contact" className="relative py-28 px-6 overflow-hidden" style={{ background: "#130d0a" }}>
       <div className="absolute top-[-20%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-20 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(80px)" }} />
+        style={{ background: "radial-gradient(circle, #8b1a0f 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="absolute bottom-[-20%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-15 pointer-events-none"
         style={{ background: "radial-gradient(circle, #3f6b4a 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="grain-pattern absolute inset-0 pointer-events-none" />
@@ -58,9 +58,9 @@ export default function FinalCTA() {
       <div className="relative max-w-5xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-14 items-start">
           <div className="reveal-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-orange-300 mb-7"
-              style={{ background: "rgba(232,89,12,0.08)", borderColor: "rgba(232,89,12,0.2)" }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flicker" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-[#c9432c] mb-7"
+              style={{ background: "rgba(139,26,15,0.08)", borderColor: "rgba(139,26,15,0.2)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b0271a] flicker" />
               Free — No Obligation
             </div>
             <h2 className="display-font text-4xl lg:text-5xl font-bold tracking-tight leading-tight mb-6">
@@ -80,8 +80,8 @@ export default function FinalCTA() {
                 "Live in as little as 1 week*",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-white/60">
-                  <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-orange-400 text-xs font-bold"
-                    style={{ background: "rgba(232,89,12,0.12)" }}>✓</span>
+                  <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-[#b0271a] text-xs font-bold"
+                    style={{ background: "rgba(139,26,15,0.12)" }}>✓</span>
                   {item}
                 </li>
               ))}
@@ -101,7 +101,7 @@ export default function FinalCTA() {
             {status === "success" ? (
               <div className="flex flex-col items-center text-center py-10 gap-4">
                 <div className="w-14 h-14 rounded-full flex items-center justify-center text-2xl"
-                  style={{ background: "rgba(232,89,12,0.12)" }}>✅</div>
+                  style={{ background: "rgba(139,26,15,0.12)" }}>✅</div>
                 <h4 className="text-white font-bold text-lg">We&apos;ve got your request!</h4>
                 <p className="text-white/45 text-sm leading-relaxed max-w-xs">
                   Thanks, <strong className="text-white">{fields.name || "there"}</strong>! We&apos;ll review your info and
@@ -109,7 +109,7 @@ export default function FinalCTA() {
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
-                  className="mt-2 text-sm text-orange-400 hover:text-orange-300 transition-colors underline underline-offset-2"
+                  className="mt-2 text-sm text-[#b0271a] hover:text-[#c9432c] transition-colors underline underline-offset-2"
                 >
                   Submit another request
                 </button>
@@ -119,7 +119,7 @@ export default function FinalCTA() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium text-white/40 mb-1.5">
-                      Your Name <span className="text-orange-400">*</span>
+                      Your Name <span className="text-[#b0271a]">*</span>
                     </label>
                     <input
                       type="text" required
@@ -131,7 +131,7 @@ export default function FinalCTA() {
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-white/40 mb-1.5">
-                      Business Name <span className="text-orange-400">*</span>
+                      Business Name <span className="text-[#b0271a]">*</span>
                     </label>
                     <input
                       type="text" required
@@ -146,7 +146,7 @@ export default function FinalCTA() {
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-medium text-white/40 mb-1.5">
-                      Phone <span className="text-orange-400">*</span>
+                      Phone <span className="text-[#b0271a]">*</span>
                     </label>
                     <input
                       type="tel" required
@@ -158,7 +158,7 @@ export default function FinalCTA() {
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-white/40 mb-1.5">
-                      Best Time to Call <span className="text-orange-400">*</span>
+                      Best Time to Call <span className="text-[#b0271a]">*</span>
                     </label>
                     <select
                       required
@@ -176,7 +176,7 @@ export default function FinalCTA() {
 
                 <div>
                   <label className="block text-xs font-medium text-white/40 mb-1.5">
-                    Delivery Area <span className="text-orange-400">*</span>
+                    Delivery Area <span className="text-[#b0271a]">*</span>
                   </label>
                   <input
                     type="text" required
@@ -208,10 +208,10 @@ export default function FinalCTA() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full py-4 rounded-xl font-bold text-black text-base transition-all shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-4 rounded-xl font-bold text-white text-base transition-all shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                   style={{
-                    background: "linear-gradient(135deg, #e8590c, #fbbf24)",
-                    boxShadow: "0 0 30px rgba(232,89,12,0.25)",
+                    background: "linear-gradient(135deg, #8b1a0f, #c9432c)",
+                    boxShadow: "0 0 30px rgba(139,26,15,0.25)",
                   }}
                 >
                   {status === "loading" ? "Sending…" : "Check Availability →"}

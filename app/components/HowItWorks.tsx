@@ -38,7 +38,7 @@ export default function HowItWorks() {
     <section id="how-it-works" className="py-28 px-6" style={{ background: "#130d0a" }}>
       <div className="max-w-5xl mx-auto">
         <div className="reveal-up text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">Simple & transparent</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-4">Simple & transparent</p>
           <h2 className="display-font text-4xl lg:text-5xl font-bold tracking-tight mb-5">
             How It Works. <span className="gradient-text">No Surprises.</span>
           </h2>
@@ -53,19 +53,19 @@ export default function HowItWorks() {
               <div
                 className="reveal-left rounded-3xl p-8 border transition-all"
                 style={{
-                  background: i === 1 ? "rgba(232,89,12,0.04)" : "rgba(255,237,213,0.03)",
-                  borderColor: i === 1 ? "rgba(232,89,12,0.2)" : "rgba(255,237,213,0.06)",
+                  background: i === 1 ? "rgba(139,26,15,0.04)" : "rgba(255,237,213,0.03)",
+                  borderColor: i === 1 ? "rgba(139,26,15,0.2)" : "rgba(255,237,213,0.06)",
                   animationDelay: `${0.2 + i * 0.15}s`,
                 }}
               >
                 <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black text-black flex-shrink-0"
-                      style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black text-white flex-shrink-0"
+                      style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
                       {step.num}
                     </div>
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-widest text-orange-400">{step.tag}</p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a]">{step.tag}</p>
                       <h3 className="text-xl font-bold text-white mt-0.5">{step.title}</h3>
                     </div>
                   </div>
@@ -89,8 +89,8 @@ export default function HowItWorks() {
 
               {i === 0 && (
                 <div className="reveal-fade flex flex-col items-center py-5 gap-1" style={{ animationDelay: "0.5s" }}>
-                  <div className="w-px h-8 bg-gradient-to-b from-orange-500/30 to-orange-500/5" />
-                  <svg className="text-orange-500/30" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                  <div className="w-px h-8 bg-gradient-to-b from-[#8b1a0f]/30 to-[#8b1a0f]/5" />
+                  <svg className="text-[#8b1a0f]/30" width="14" height="8" viewBox="0 0 14 8" fill="none">
                     <path d="M7 8L0 0h14L7 8z" fill="currentColor" />
                   </svg>
                   <span className="text-white/20 text-xs mt-1">once you&apos;re live</span>
@@ -102,7 +102,7 @@ export default function HowItWorks() {
           <div className="reveal-up text-center mt-10" style={{ animationDelay: "0.6s" }}>
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-orange-400 hover:text-orange-300 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#b0271a] hover:text-[#c9432c] transition-colors"
             >
               View full pricing & add-ons
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

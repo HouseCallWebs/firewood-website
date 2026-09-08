@@ -41,7 +41,7 @@ export default function TermsPage() {
   return (
     <div style={{ background: "#130d0a", minHeight: "100vh" }}>
       <div className="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-8 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(80px)" }} />
+        style={{ background: "radial-gradient(circle, #8b1a0f 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="grain-pattern fixed inset-0 pointer-events-none" />
 
       <Nav />
@@ -50,7 +50,7 @@ export default function TermsPage() {
         <div className="max-w-2xl mx-auto">
 
           <div className="mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">Legal</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-4">Legal</p>
             <h1 className="display-font text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">
               Terms of Service
             </h1>
@@ -60,7 +60,7 @@ export default function TermsPage() {
           </div>
 
           <div className="rounded-2xl p-6 mb-10 border border-white/6"
-            style={{ background: "rgba(232,89,12,0.04)", borderColor: "rgba(232,89,12,0.15)" }}>
+            style={{ background: "rgba(139,26,15,0.04)", borderColor: "rgba(139,26,15,0.15)" }}>
             <p className="text-white/60 text-sm leading-relaxed">
               Please read these Terms of Service carefully before using any services provided by Firewood Website.
               By engaging our services you agree to be bound by the terms below.
@@ -80,7 +80,7 @@ export default function TermsPage() {
             <p className="text-white/25 text-xs">
               Questions? Email us at{" "}
               <a href="mailto:hello@housecallwebs.com"
-                className="text-orange-400 hover:text-orange-300 transition-colors underline underline-offset-2">
+                className="text-[#b0271a] hover:text-[#c9432c] transition-colors underline underline-offset-2">
                 hello@housecallwebs.com
               </a>
             </p>

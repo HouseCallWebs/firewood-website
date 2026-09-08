@@ -24,7 +24,7 @@ export default function Problem() {
     <section id="services" className="py-28 px-6" style={{ background: "#1b130e" }}>
       <div className="max-w-6xl mx-auto">
         <div className="reveal-up text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">Sound familiar?</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-4">Sound familiar?</p>
           <h2 className="display-font text-4xl lg:text-5xl font-bold tracking-tight mb-5">
             Is Your Website <span className="gradient-text">Costing You Cords?</span>
           </h2>

@@ -23,7 +23,7 @@ export default function AIReceptionistPitch() {
     <section className="py-28 px-6" style={{ background: "#1b130e" }}>
       <div className="max-w-2xl mx-auto">
         <div className="reveal-up text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">AI phone receptionist add-on</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-4">AI phone receptionist add-on</p>
           <h2 className="display-font text-4xl lg:text-5xl font-bold tracking-tight mb-5">
             See What Your <span className="gradient-text">AI Receptionist</span> Could Sound Like.
           </h2>
@@ -43,11 +43,11 @@ export default function AIReceptionistPitch() {
             <div key={i} className={`flex ${line.speaker === "ai" ? "justify-end" : "justify-start"}`}>
               <div
                 className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                  line.speaker === "ai" ? "text-black" : "text-white/75"
+                  line.speaker === "ai" ? "text-white" : "text-white/75"
                 }`}
                 style={
                   line.speaker === "ai"
-                    ? { background: "linear-gradient(135deg, #e8590c, #fbbf24)" }
+                    ? { background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }
                     : { background: "rgba(255,255,255,0.06)" }
                 }
               >

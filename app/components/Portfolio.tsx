@@ -24,7 +24,7 @@ export default function Portfolio() {
     <section id="portfolio" className="py-28 px-6" style={{ background: "#1b130e" }}>
       <div className="max-w-6xl mx-auto">
         <div className="reveal-up text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">See it&apos;s real</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-4">See it&apos;s real</p>
           <h2 className="display-font text-4xl lg:text-5xl font-bold tracking-tight mb-5">
             This Isn&apos;t a <span className="gradient-text">Template Mockup.</span>
           </h2>
@@ -42,7 +42,7 @@ export default function Portfolio() {
               href={site.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-2xl border border-white/6 hover:border-orange-500/25 transition-all overflow-hidden block"
+              className="group rounded-2xl border border-white/6 hover:border-[#8b1a0f]/25 transition-all overflow-hidden block"
               style={{ background: "rgba(255,237,213,0.03)" }}
             >
               {/* Browser-chrome header */}
@@ -54,14 +54,14 @@ export default function Portfolio() {
               </div>
               <div className="p-6">
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <p className="text-base font-bold text-white group-hover:text-orange-100 transition-colors">{site.name}</p>
+                  <p className="text-base font-bold text-white group-hover:text-[#f5dad3] transition-colors">{site.name}</p>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0"
-                    style={{ background: "rgba(232,89,12,0.14)", color: "#f2994a" }}>
+                    style={{ background: "rgba(139,26,15,0.14)", color: "#b0271a" }}>
                     {site.trade}
                   </span>
                 </div>
                 <p className="text-white/35 text-sm mb-4">{site.location}</p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-400 group-hover:text-orange-300 transition-colors">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#b0271a] group-hover:text-[#c9432c] transition-colors">
                   View live site
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -74,9 +74,9 @@ export default function Portfolio() {
 
         {/* Firewood-specific preview teaser */}
         <div className="reveal-up rounded-2xl border p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
-          style={{ background: "rgba(232,89,12,0.05)", borderColor: "rgba(232,89,12,0.2)" }}>
+          style={{ background: "rgba(139,26,15,0.05)", borderColor: "rgba(139,26,15,0.2)" }}>
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Coming to every client</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">Coming to every client</p>
             <h3 className="text-xl font-bold text-white mb-2">
               Your Own Personalized Preview
             </h3>

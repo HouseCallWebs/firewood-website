@@ -92,12 +92,12 @@ export default function Pricing() {
 
   const cardBase = "rounded-2xl border transition-all duration-200";
   const cardOff = "border-white/7 bg-white/[0.025]";
-  const cardOn = "border-orange-500/60 bg-orange-500/[0.06]";
+  const cardOn = "border-[#8b1a0f]/60 bg-[#8b1a0f]/[0.06]";
 
   return (
     <div style={{ background: "#130d0a", minHeight: "100vh" }}>
       <div className="pricing-orbs fixed top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-10 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(80px)" }} />
+        style={{ background: "radial-gradient(circle, #8b1a0f 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="pricing-orbs fixed bottom-[20%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-8 pointer-events-none"
         style={{ background: "radial-gradient(circle, #3f6b4a 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="grain-pattern fixed inset-0 pointer-events-none" />
@@ -109,7 +109,7 @@ export default function Pricing() {
 
           <div className="flex justify-center">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold"
-              style={{ background: "rgba(251,191,36,0.12)", border: "1px solid rgba(251,191,36,0.25)", color: "#fbbf24" }}>
+              style={{ background: "rgba(176,39,26,0.12)", border: "1px solid rgba(176,39,26,0.25)", color: "#c9432c" }}>
               ⚡ Currently accepting {SPOTS_LEFT} new clients this month — spots are limited.
             </span>
           </div>
@@ -122,9 +122,9 @@ export default function Pricing() {
               <button
                 onClick={() => setIsAnnual(false)}
                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 ${
-                  !isAnnual ? "text-black shadow-lg" : "text-white/40 hover:text-white/70"
+                  !isAnnual ? "text-white shadow-lg" : "text-white/40 hover:text-white/70"
                 }`}
-                style={!isAnnual ? { background: "linear-gradient(135deg, #e8590c, #fbbf24)" } : {}}
+                style={!isAnnual ? { background: "linear-gradient(135deg, #8b1a0f, #c9432c)" } : {}}
               >
                 Monthly
               </button>
@@ -132,9 +132,9 @@ export default function Pricing() {
               <button
                 onClick={() => setIsAnnual(true)}
                 className={`relative px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 flex items-center gap-2.5 ${
-                  isAnnual ? "text-black shadow-lg" : "text-white/40 hover:text-white/70"
+                  isAnnual ? "text-white shadow-lg" : "text-white/40 hover:text-white/70"
                 }`}
-                style={isAnnual ? { background: "linear-gradient(135deg, #e8590c, #fbbf24)" } : {}}
+                style={isAnnual ? { background: "linear-gradient(135deg, #8b1a0f, #c9432c)" } : {}}
               >
                 Annual
                 <span
@@ -167,7 +167,7 @@ export default function Pricing() {
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2 text-center">seasonal pricing</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2 text-center">seasonal pricing</p>
             <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-2 text-center">One Website, Priced for the Season</h2>
             <p className="text-white/40 text-sm text-center max-w-xl mx-auto mb-7">
               Firewood is a seasonal business — your site cost should be too. Full lead-gen
@@ -180,13 +180,13 @@ export default function Pricing() {
               <div
                 className={`${cardBase} p-7 transition-all duration-300`}
                 style={{
-                  borderColor: isAnnual ? "rgba(251,191,36,0.55)" : "rgba(232,89,12,0.45)",
-                  background: isAnnual ? "rgba(251,191,36,0.04)" : "rgba(232,89,12,0.04)",
+                  borderColor: isAnnual ? "rgba(176,39,26,0.55)" : "rgba(139,26,15,0.45)",
+                  background: isAnnual ? "rgba(176,39,26,0.04)" : "rgba(139,26,15,0.04)",
                 }}
               >
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-black"
-                    style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
+                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white"
+                    style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
                     Sep – Mar
                   </span>
                   <AnimatePresence>
@@ -206,7 +206,7 @@ export default function Pricing() {
                   </AnimatePresence>
                 </div>
 
-                <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">your anchor</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">your anchor</p>
                 <h3 className="display-font text-xl font-bold text-white mb-3">Full Service</h3>
                 <p className="text-white/45 text-sm leading-relaxed mb-5">
                   Active lead generation. Every add-on and bundle below is available and
@@ -292,7 +292,7 @@ export default function Pricing() {
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">individual add-ons</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">individual add-ons</p>
             <h3 className="display-font text-2xl font-bold text-white mb-2">Supercharge Your Results</h3>
             <p className="text-white/40 text-sm mb-7">
               Add any of these on top of your base plan.
@@ -315,13 +315,13 @@ export default function Pricing() {
                   <button
                     key={addon.id}
                     onClick={() => toggleAddon(addon.id)}
-                    className={`${cardBase} ${on ? cardOn : cardOff} w-full text-left px-5 py-4 flex items-center gap-4 hover:border-orange-500/40 cursor-pointer`}
+                    className={`${cardBase} ${on ? cardOn : cardOff} w-full text-left px-5 py-4 flex items-center gap-4 hover:border-[#8b1a0f]/40 cursor-pointer`}
                   >
                     <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center border-2 transition-all duration-200 ${
-                      on ? "border-orange-400 bg-orange-400" : "border-white/20 bg-transparent"
+                      on ? "border-[#b0271a] bg-[#b0271a]" : "border-white/20 bg-transparent"
                     }`}>
                       {on && (
-                        <svg className="w-2.5 h-2.5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" />
                         </svg>
                       )}
@@ -351,7 +351,7 @@ export default function Pricing() {
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">or choose a bundle</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">or choose a bundle</p>
             <h3 className="display-font text-2xl font-bold text-white mb-2">Save More with a Bundle</h3>
             <p className="text-white/40 text-sm mb-7">
               Bundles replace individual add-on selections. Billed {isAnnual ? "annually" : "monthly"} on top of your base plan.
@@ -377,15 +377,15 @@ export default function Pricing() {
                     className={`${cardBase} ${
                       bundle.popular
                         ? on
-                          ? "border-orange-400/80 bg-orange-500/[0.07]"
-                          : "border-orange-500/35 bg-orange-500/[0.03]"
+                          ? "border-[#b0271a]/80 bg-[#8b1a0f]/[0.07]"
+                          : "border-[#8b1a0f]/35 bg-[#8b1a0f]/[0.03]"
                         : on ? cardOn : cardOff
-                    } w-full text-left p-6 flex flex-col gap-4 hover:border-orange-500/40 relative`}
+                    } w-full text-left p-6 flex flex-col gap-4 hover:border-[#8b1a0f]/40 relative`}
                   >
                     {bundle.popular && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full text-black"
-                          style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
+                        <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full text-white"
+                          style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
                           Most Popular
                         </span>
                       </div>
@@ -398,7 +398,7 @@ export default function Pricing() {
                       <ul className="space-y-1.5">
                         {bundle.includes.map((item) => (
                           <li key={item} className="flex items-center gap-2 text-xs text-white/45">
-                            <span className="text-orange-400/60 flex-shrink-0">✓</span>
+                            <span className="text-[#b0271a]/60 flex-shrink-0">✓</span>
                             {item}
                           </li>
                         ))}
@@ -427,10 +427,10 @@ export default function Pricing() {
                     </div>
 
                     <div className={`absolute top-4 right-4 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-                      on ? "border-orange-400 bg-orange-400" : "border-white/20"
+                      on ? "border-[#b0271a] bg-[#b0271a]" : "border-white/20"
                     }`}>
                       {on && (
-                        <svg className="w-2 h-2 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" />
                         </svg>
                       )}
@@ -442,7 +442,7 @@ export default function Pricing() {
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">
               your {isAnnual ? "annual" : "monthly"} total
             </p>
             <h3 className="display-font text-2xl font-bold text-white mb-1">Here&apos;s What You&apos;re Looking At</h3>
@@ -545,8 +545,8 @@ export default function Pricing() {
 
                   <button
                     onClick={() => setModalOpen(true)}
-                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-black text-sm transition-all hover:scale-105 hover:brightness-110 shadow-xl flex-shrink-0"
-                    style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", boxShadow: "0 0 24px rgba(232,89,12,0.25)" }}
+                    className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white text-sm transition-all hover:scale-105 hover:brightness-110 shadow-xl flex-shrink-0"
+                    style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)", boxShadow: "0 0 24px rgba(139,26,15,0.25)" }}
                   >
                     Get Started →
                   </button>
@@ -658,7 +658,7 @@ export default function Pricing() {
                       value={modalName}
                       onChange={(e) => { setModalName(e.target.value); setModalErrors((p) => ({ ...p, name: "" })); }}
                       placeholder="John Smith"
-                      className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-orange-500/50 transition-colors"
+                      className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-[#8b1a0f]/50 transition-colors"
                       style={{ background: "rgba(255,255,255,0.05)" }}
                     />
                     {modalErrors.name && <p className="text-red-400 text-xs mt-1">{modalErrors.name}</p>}
@@ -670,7 +670,7 @@ export default function Pricing() {
                       value={modalEmail}
                       onChange={(e) => { setModalEmail(e.target.value); setModalErrors((p) => ({ ...p, email: "" })); }}
                       placeholder="john@smithsfirewood.com"
-                      className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-orange-500/50 transition-colors"
+                      className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-[#8b1a0f]/50 transition-colors"
                       style={{ background: "rgba(255,255,255,0.05)" }}
                     />
                     {modalErrors.email && <p className="text-red-400 text-xs mt-1">{modalErrors.email}</p>}
@@ -682,11 +682,11 @@ export default function Pricing() {
                         onChange={(e) => setAuthChecked(e.target.checked)} className="sr-only" />
                       <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-150 ${
                         authChecked
-                          ? "border-orange-400 bg-orange-400"
+                          ? "border-[#b0271a] bg-[#b0271a]"
                           : "border-white/25 bg-transparent group-hover:border-white/45"
                       }`}>
                         {authChecked && (
-                          <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
@@ -707,11 +707,11 @@ export default function Pricing() {
                         onChange={(e) => setTosChecked(e.target.checked)} className="sr-only" />
                       <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-150 ${
                         tosChecked
-                          ? "border-orange-400 bg-orange-400"
+                          ? "border-[#b0271a] bg-[#b0271a]"
                           : "border-white/25 bg-transparent group-hover:border-white/45"
                       }`}>
                         {tosChecked && (
-                          <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
@@ -722,7 +722,7 @@ export default function Pricing() {
                       <button
                         type="button"
                         onClick={() => setTosDrawerOpen(true)}
-                        className="text-orange-400 hover:text-orange-300 underline underline-offset-2 transition-colors"
+                        className="text-[#b0271a] hover:text-[#c9432c] underline underline-offset-2 transition-colors"
                       >
                         Terms of Service
                       </button>
@@ -741,10 +741,10 @@ export default function Pricing() {
                       className="w-full py-4 rounded-xl font-bold text-base transition-all duration-200 disabled:cursor-not-allowed"
                       style={{
                         background: authChecked && tosChecked
-                          ? "linear-gradient(135deg, #e8590c, #fbbf24)"
+                          ? "linear-gradient(135deg, #8b1a0f, #c9432c)"
                           : "rgba(255,255,255,0.07)",
                         color: authChecked && tosChecked ? "#000" : "rgba(255,255,255,0.2)",
-                        boxShadow: authChecked && tosChecked ? "0 0 24px rgba(232,89,12,0.3)" : "none",
+                        boxShadow: authChecked && tosChecked ? "0 0 24px rgba(139,26,15,0.3)" : "none",
                       }}
                     >
                       {modalStatus === "loading" ? "Processing…" : "Proceed to Payment →"}
@@ -852,8 +852,8 @@ export default function Pricing() {
               <div className="px-6 py-4 border-t border-white/7 flex-shrink-0">
                 <button
                   onClick={() => { setTosChecked(true); setTosDrawerOpen(false); }}
-                  className="w-full py-3.5 rounded-xl font-bold text-black text-sm transition-all hover:brightness-110"
-                  style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}
+                  className="w-full py-3.5 rounded-xl font-bold text-white text-sm transition-all hover:brightness-110"
+                  style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}
                 >
                   I Agree to the Terms of Service
                 </button>

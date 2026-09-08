@@ -61,7 +61,7 @@ export default function DemoStorefront({ businessName }: Props) {
   return (
     <div style={{ background: "#130d0a", minHeight: "100vh" }}>
       <div className="fixed top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-15 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(80px)" }} />
+        style={{ background: "radial-gradient(circle, #8b1a0f 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="fixed bottom-[10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-8 pointer-events-none"
         style={{ background: "radial-gradient(circle, #7a4a24 0%, transparent 65%)", filter: "blur(80px)" }} />
       <div className="grain-pattern fixed inset-0 pointer-events-none" />
@@ -72,8 +72,8 @@ export default function DemoStorefront({ businessName }: Props) {
           <Logo businessName={businessName} />
           <a
             href="#quote"
-            className="text-sm font-bold px-5 py-2.5 rounded-xl text-black transition-all hover:scale-105 hover:brightness-110"
-            style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}
+            className="text-sm font-bold px-5 py-2.5 rounded-xl text-white transition-all hover:scale-105 hover:brightness-110"
+            style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}
           >
             Order Now
           </a>
@@ -102,9 +102,9 @@ export default function DemoStorefront({ businessName }: Props) {
         </div>
 
         <div className="max-w-3xl mx-auto relative z-10">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-orange-300 mb-8"
-            style={{ background: "rgba(232,89,12,0.10)", borderColor: "rgba(232,89,12,0.25)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flicker" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-[#c9432c] mb-8"
+            style={{ background: "rgba(139,26,15,0.10)", borderColor: "rgba(139,26,15,0.25)" }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#b0271a] flicker" />
             Family-Owned &amp; Operated
           </span>
           <h1 className="display-font text-4xl sm:text-5xl font-bold leading-[1.08] tracking-tight text-white mb-6">
@@ -118,8 +118,8 @@ export default function DemoStorefront({ businessName }: Props) {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="#quote"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-all hover:scale-105 hover:brightness-110 shadow-xl"
-              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", boxShadow: "0 0 30px rgba(232,89,12,0.3)" }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:scale-105 hover:brightness-110 shadow-xl"
+              style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)", boxShadow: "0 0 30px rgba(139,26,15,0.3)" }}
             >
               Get Firewood Delivered This Week
             </a>
@@ -141,7 +141,7 @@ export default function DemoStorefront({ businessName }: Props) {
       <section id="quote" className="relative px-6 pb-24">
         <div className="max-w-2xl mx-auto rounded-3xl border border-white/8 p-8"
           style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)" }}>
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Instant quote</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">Instant quote</p>
           <h2 className="display-font text-white font-bold text-2xl mb-7">Get Your Price</h2>
 
           <label className="block text-xs font-medium text-white/40 mb-2">Wood Species</label>
@@ -153,9 +153,9 @@ export default function DemoStorefront({ businessName }: Props) {
                   key={s.id}
                   onClick={() => setSpecies(s.id)}
                   className={`rounded-2xl border p-3 text-left transition-all duration-150 ${
-                    on ? "border-orange-400/70" : "border-white/8 hover:border-white/20"
+                    on ? "border-[#b0271a]/70" : "border-white/8 hover:border-white/20"
                   }`}
-                  style={{ background: on ? "rgba(232,89,12,0.08)" : "rgba(255,255,255,0.02)" }}
+                  style={{ background: on ? "rgba(139,26,15,0.08)" : "rgba(255,255,255,0.02)" }}
                 >
                   <p className={`font-bold text-sm mb-0.5 ${on ? "text-white" : "text-white/70"}`}>{s.label}</p>
                   {"desc" in s && s.desc && <p className="text-white/30 text-[11px] mb-2">{s.desc}</p>}
@@ -175,9 +175,9 @@ export default function DemoStorefront({ businessName }: Props) {
                   key={c.id}
                   onClick={() => setCordSize(c.id)}
                   className={`rounded-2xl border p-4 text-left transition-all duration-150 ${
-                    on ? "border-orange-400/70" : "border-white/8 hover:border-white/20"
+                    on ? "border-[#b0271a]/70" : "border-white/8 hover:border-white/20"
                   }`}
-                  style={{ background: on ? "rgba(232,89,12,0.08)" : "rgba(255,255,255,0.02)" }}
+                  style={{ background: on ? "rgba(139,26,15,0.08)" : "rgba(255,255,255,0.02)" }}
                 >
                   <p className={`font-bold text-sm mb-1 ${on ? "text-white" : "text-white/70"}`}>{c.label}</p>
                   <p className="text-white/35 text-xs mb-3">{c.desc}</p>
@@ -197,7 +197,7 @@ export default function DemoStorefront({ businessName }: Props) {
                 value={zip}
                 onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
                 placeholder="e.g. 65801"
-                className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-orange-500/50 transition-colors"
+                className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-[#8b1a0f]/50 transition-colors"
                 style={{ background: "rgba(255,255,255,0.05)" }}
               />
               {zip.length === 5 && (
@@ -211,12 +211,12 @@ export default function DemoStorefront({ businessName }: Props) {
                 onClick={() => setStacking((s) => !s)}
                 className="w-full rounded-xl px-4 py-3 flex items-center justify-between border transition-all duration-150"
                 style={{
-                  background: stacking ? "rgba(232,89,12,0.08)" : "rgba(255,255,255,0.05)",
-                  borderColor: stacking ? "rgba(232,89,12,0.45)" : "rgba(255,255,255,0.08)",
+                  background: stacking ? "rgba(139,26,15,0.08)" : "rgba(255,255,255,0.05)",
+                  borderColor: stacking ? "rgba(139,26,15,0.45)" : "rgba(255,255,255,0.08)",
                 }}
               >
                 <span className="text-sm text-white/70">Stack it for me (+${STACKING_FEE})</span>
-                <span className={`w-10 h-5 rounded-full relative transition-colors flex-shrink-0 ${stacking ? "bg-orange-500" : "bg-white/15"}`}>
+                <span className={`w-10 h-5 rounded-full relative transition-colors flex-shrink-0 ${stacking ? "bg-[#8b1a0f]" : "bg-white/15"}`}>
                   <span
                     className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all"
                     style={{ left: stacking ? "22px" : "2px" }}
@@ -240,8 +240,8 @@ export default function DemoStorefront({ businessName }: Props) {
 
           <a
             href={`${ROOT_URL}/contact`}
-            className="mt-6 w-full inline-flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-black text-base transition-all hover:scale-[1.02] hover:brightness-110 shadow-xl"
-            style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", boxShadow: "0 0 30px rgba(232,89,12,0.25)" }}
+            className="mt-6 w-full inline-flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white text-base transition-all hover:scale-[1.02] hover:brightness-110 shadow-xl"
+            style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)", boxShadow: "0 0 30px rgba(139,26,15,0.25)" }}
           >
             Book This Delivery →
           </a>
@@ -265,8 +265,8 @@ export default function DemoStorefront({ businessName }: Props) {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="#quote"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-all hover:scale-105 hover:brightness-110 shadow-xl"
-              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", boxShadow: "0 0 30px rgba(232,89,12,0.3)" }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:scale-105 hover:brightness-110 shadow-xl"
+              style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)", boxShadow: "0 0 30px rgba(139,26,15,0.3)" }}
             >
               Get Firewood Delivered This Week
             </a>

@@ -13,7 +13,7 @@ export default function TrustBarStrip() {
       <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
         {ITEMS.map((item) => (
           <span key={item} className="inline-flex items-center gap-2 text-sm font-medium text-white/60">
-            <BadgeCheckIcon className="w-4 h-4 text-orange-400 flex-shrink-0" />
+            <BadgeCheckIcon className="w-4 h-4 text-[#b0271a] flex-shrink-0" />
             {item}
           </span>
         ))}

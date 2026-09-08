@@ -36,7 +36,7 @@ export default function WhyUs() {
     <section className="py-28 px-6" style={{ background: "#130d0a" }}>
       <div className="max-w-6xl mx-auto">
         <div className="reveal-up text-center mb-16">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-4">Why we&apos;re different</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-4">Why we&apos;re different</p>
           <h2 className="display-font text-4xl lg:text-5xl font-bold tracking-tight mb-5">
             Built for Firewood. <span className="gradient-text">Not Everyone Else.</span>
           </h2>
@@ -50,7 +50,7 @@ export default function WhyUs() {
           {features.map((f, i) => (
             <div
               key={f.title}
-              className="reveal-up rounded-2xl p-7 border border-white/5 hover:border-orange-500/15 transition-all group cursor-default"
+              className="reveal-up rounded-2xl p-7 border border-white/5 hover:border-[#8b1a0f]/15 transition-all group cursor-default"
               style={{ background: "rgba(255,237,213,0.025)", animationDelay: `${0.1 * i}s` }}
             >
               <div className="text-3xl mb-5 group-hover:scale-110 transition-transform duration-300 inline-block">

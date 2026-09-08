@@ -18,8 +18,8 @@ export function CrossedAxesMark({ className }: IconProps) {
       </g>
       <defs>
         <linearGradient id="axesMarkGrad" x1="4" y1="2" x2="20" y2="22" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fbbf24" />
-          <stop offset="1" stopColor="#e8590c" />
+          <stop stopColor="#c9432c" />
+          <stop offset="1" stopColor="#8b1a0f" />
         </linearGradient>
       </defs>
     </svg>

@@ -13,7 +13,7 @@ export default function PhotoGallery() {
     <section className="relative px-6 py-16" style={{ background: "rgba(255,255,255,0.015)" }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">See the work</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">See the work</p>
           <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-3">From Our Yard to Yours</h2>
           <p className="text-white/50 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Every load comes straight from our yard — split, seasoned, and ready before

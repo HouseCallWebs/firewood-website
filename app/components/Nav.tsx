@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Wordmark from "./Wordmark";
 
 const navLinks = [
   { label: "Services", href: "/#services" },
@@ -33,14 +34,8 @@ export default function Nav() {
         }}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
-              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
-              🔥
-            </div>
-            <span className="display-font font-bold text-lg text-white tracking-tight">
-              Firewood <span className="gradient-text">Website</span>
-            </span>
+          <Link href="/" className="flex items-center">
+            <Wordmark className="h-8 w-auto" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -54,8 +49,8 @@ export default function Nav() {
 
           <div className="hidden md:flex items-center gap-3">
             <Link href="/contact"
-              className="text-sm font-bold px-5 py-2.5 rounded-xl text-black transition-all duration-200 hover:scale-105 hover:brightness-110"
-              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
+              className="text-sm font-bold px-5 py-2.5 rounded-xl text-white transition-all duration-200 hover:scale-105 hover:brightness-110"
+              style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
               Check Availability
             </Link>
           </div>
@@ -92,8 +87,8 @@ export default function Nav() {
               </Link>
             ))}
             <Link href="/contact" onClick={() => setMenuOpen(false)}
-              className="mt-1 text-center text-sm font-bold px-5 py-3 rounded-xl text-black"
-              style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
+              className="mt-1 text-center text-sm font-bold px-5 py-3 rounded-xl text-white"
+              style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
               Check Availability
             </Link>
           </motion.div>

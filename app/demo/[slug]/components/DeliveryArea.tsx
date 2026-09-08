@@ -12,7 +12,7 @@ export default function DeliveryArea() {
     <section className="relative px-6 py-16">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">Service area</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">Service area</p>
           <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-3">Now Delivering To</h2>
           <p className="text-white/50 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             From Millbrook to the surrounding towns, we&apos;ve been delivering seasoned
@@ -27,7 +27,7 @@ export default function DeliveryArea() {
               className="inline-flex items-center gap-1.5 text-sm font-medium text-white/70 px-4 py-2 rounded-full border border-white/8"
               style={{ background: "rgba(255,255,255,0.04)" }}
             >
-              <PinIcon className="w-3.5 h-3.5 text-orange-400/80" />
+              <PinIcon className="w-3.5 h-3.5 text-[#b0271a]/80" />
               {town}
             </span>
           ))}

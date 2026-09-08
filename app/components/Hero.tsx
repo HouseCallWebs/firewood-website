@@ -15,20 +15,20 @@ export default function Hero() {
     >
       <div className="hero-orbs absolute inset-0 pointer-events-none overflow-hidden">
         <div className="orb-1 absolute top-[-15%] right-[-8%] w-[650px] h-[650px] rounded-full opacity-25"
-          style={{ background: "radial-gradient(circle, #e8590c 0%, transparent 65%)", filter: "blur(90px)" }} />
+          style={{ background: "radial-gradient(circle, #8b1a0f 0%, transparent 65%)", filter: "blur(90px)" }} />
         <div className="orb-2 absolute bottom-[-20%] left-[-10%] w-[580px] h-[580px] rounded-full opacity-20"
           style={{ background: "radial-gradient(circle, #3f6b4a 0%, transparent 65%)", filter: "blur(80px)" }} />
         <div className="orb-3 absolute top-[45%] left-[42%] w-[380px] h-[380px] rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, #fbbf24 0%, transparent 65%)", filter: "blur(70px)" }} />
+          style={{ background: "radial-gradient(circle, #c9432c 0%, transparent 65%)", filter: "blur(70px)" }} />
       </div>
 
       <div className="absolute inset-0 grain-pattern pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-20 text-center">
         <div className="hero-fade-1">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-orange-300 mb-8 inline-block"
-            style={{ background: "rgba(232,89,12,0.10)", borderColor: "rgba(232,89,12,0.25)" }}>
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 flicker" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold tracking-widest uppercase text-[#c9432c] mb-8 inline-block"
+            style={{ background: "rgba(139,26,15,0.10)", borderColor: "rgba(139,26,15,0.25)" }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#b0271a] flicker" />
             Built Only For Firewood Delivery Businesses
           </span>
         </div>
@@ -48,10 +48,10 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-black transition-all hover:scale-105 hover:brightness-110 shadow-xl"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:scale-105 hover:brightness-110 shadow-xl"
               style={{
-                background: "linear-gradient(135deg, #e8590c, #fbbf24)",
-                boxShadow: "0 0 40px rgba(232,89,12,0.30)",
+                background: "linear-gradient(135deg, #8b1a0f, #c9432c)",
+                boxShadow: "0 0 40px rgba(139,26,15,0.30)",
               }}
             >
               Book a Free 15-Min Call
@@ -71,8 +71,8 @@ export default function Hero() {
             href="/pricing"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-5 rounded-2xl text-lg font-black text-white transition-all hover:scale-105 hover:brightness-110 shadow-2xl"
             style={{
-              background: "#e8590c",
-              boxShadow: "0 0 50px rgba(232,89,12,0.45)",
+              background: "#8b1a0f",
+              boxShadow: "0 0 50px rgba(139,26,15,0.45)",
             }}
           >
             See Pricing & Plans

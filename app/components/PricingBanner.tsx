@@ -7,9 +7,9 @@ export default function PricingBanner() {
         <div
           className="rounded-3xl border p-10 md:p-14 text-center"
           style={{
-            background: "rgba(232,89,12,0.05)",
-            borderColor: "rgba(232,89,12,0.35)",
-            boxShadow: "0 0 60px rgba(232,89,12,0.10)",
+            background: "rgba(139,26,15,0.05)",
+            borderColor: "rgba(139,26,15,0.35)",
+            boxShadow: "0 0 60px rgba(139,26,15,0.10)",
           }}
         >
           <h2 className="display-font text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
@@ -25,8 +25,8 @@ export default function PricingBanner() {
             href="/pricing"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-10 py-5 rounded-2xl text-lg font-black text-white transition-all hover:scale-105 hover:brightness-110 shadow-2xl"
             style={{
-              background: "#e8590c",
-              boxShadow: "0 0 50px rgba(232,89,12,0.45)",
+              background: "#8b1a0f",
+              boxShadow: "0 0 50px rgba(139,26,15,0.45)",
             }}
           >
             See Plans & Pricing

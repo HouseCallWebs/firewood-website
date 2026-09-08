@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Wordmark from "./Wordmark";
 
 const cols = [
   {
@@ -27,12 +28,8 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
         <div className="grid md:grid-cols-4 gap-10 mb-14">
           <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-5 group w-fit">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
-                style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>🔥</div>
-              <span className="display-font font-bold text-lg text-white tracking-tight">
-                Firewood <span className="gradient-text">Website</span>
-              </span>
+            <Link href="/" className="flex items-center mb-5 w-fit">
+              <Wordmark className="h-9 w-auto" />
             </Link>
             <p className="text-white/30 text-sm leading-relaxed max-w-xs mb-6">
               Premium, high-converting websites built exclusively for firewood
