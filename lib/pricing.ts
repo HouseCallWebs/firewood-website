@@ -2,7 +2,16 @@
 // /api/checkout/create-subscription (billing). Keep these in sync by editing
 // only this file.
 
-export const BASE_PRICE = 197; // dollars/month
+// Firewood delivery is seasonal, so the base site has two rates. BASE_PRICE
+// is the "Full Service" rate (active lead-gen, add-ons available) for
+// September through March. OFF_SEASON_PRICE is the "Off-Season Maintenance"
+// rate (site stays live/hosted, no active lead-gen) for April through
+// August — it applies to the base site only. Add-ons and bundles are only
+// available/billed during Full Service months; a client can ask to keep an
+// add-on running through the off-season, but that's an exception to the
+// maintenance rate, not the default.
+export const BASE_PRICE = 197; // dollars/month — Full Service (Sep–Mar)
+export const OFF_SEASON_PRICE = 29; // dollars/month — Off-Season Maintenance (Apr–Aug)
 
 export interface Addon {
   id: string;

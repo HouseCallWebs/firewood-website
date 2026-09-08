@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { BASE_PRICE, ADDONS, BUNDLES } from "@/lib/pricing";
+import { BASE_PRICE, OFF_SEASON_PRICE, ADDONS, BUNDLES } from "@/lib/pricing";
 
 // UPDATE THIS NUMBER MANUALLY EACH MONTH
 const SPOTS_LEFT = 2;
@@ -167,15 +167,28 @@ export default function Pricing() {
           </div>
 
           <div>
-            <div
-              className={`${cardBase} p-7 md:p-8 transition-all duration-300`}
-              style={{
-                borderColor: isAnnual ? "rgba(251,191,36,0.55)" : "rgba(232,89,12,0.45)",
-                background: isAnnual ? "rgba(251,191,36,0.04)" : "rgba(232,89,12,0.04)",
-              }}
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2 text-center">seasonal pricing</p>
+            <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-2 text-center">One Website, Priced for the Season</h2>
+            <p className="text-white/40 text-sm text-center max-w-xl mx-auto mb-7">
+              Firewood is a seasonal business — your site cost should be too. Full lead-gen
+              pricing runs September through March; an off-season maintenance rate keeps
+              your site live the rest of the year.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* Full Service */}
+              <div
+                className={`${cardBase} p-7 transition-all duration-300`}
+                style={{
+                  borderColor: isAnnual ? "rgba(251,191,36,0.55)" : "rgba(232,89,12,0.45)",
+                  background: isAnnual ? "rgba(251,191,36,0.04)" : "rgba(232,89,12,0.04)",
+                }}
+              >
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-black"
+                    style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)" }}>
+                    Sep – Mar
+                  </span>
                   <AnimatePresence>
                     {isAnnual && (
                       <motion.span
@@ -184,62 +197,80 @@ export default function Pricing() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.85 }}
                         transition={{ duration: 0.2 }}
-                        className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3"
-                        style={{ background: "linear-gradient(135deg, #e8590c, #fbbf24)", color: "#000" }}
+                        className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
+                        style={{ background: "rgba(34,197,94,0.12)", color: "#4ade80" }}
                       >
                         ★ Best Value
                       </motion.span>
                     )}
                   </AnimatePresence>
-
-                  <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">your anchor</p>
-                  <h2 className="display-font text-2xl font-bold text-white mb-3">Firewood Business Website</h2>
-                  <div className="flex flex-wrap items-center gap-2">
-                    {["Live in 7 days", "Hosting included", "Mobile ready", "Google-optimized"].map((tag) => (
-                      <span key={tag} className="text-xs font-medium text-white/50 px-3 py-1 rounded-full"
-                        style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
-                <div className="flex-shrink-0 text-right">
-                  <AnimatePresence mode="wait">
-                    {isAnnual ? (
-                      <motion.div
-                        key="annual-price"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="text-white/30 text-sm line-through mb-0.5">
-                          ${(BASE_PRICE * 12).toLocaleString()}/yr
-                        </div>
-                        <div className="text-5xl font-black gradient-text leading-none">
-                          ${toAnnual(BASE_PRICE).toLocaleString()}
-                        </div>
-                        <div className="text-white/40 text-sm mt-1">per year</div>
-                        <div className="text-xs font-bold mt-2 px-2.5 py-1 rounded-full inline-block"
-                          style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)", color: "#4ade80" }}>
-                          Save ${annualSavings(BASE_PRICE).toLocaleString()}/yr
-                        </div>
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        key="monthly-price"
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="text-5xl font-black gradient-text leading-none">${BASE_PRICE}</div>
-                        <div className="text-white/40 text-sm mt-1">per month</div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">your anchor</p>
+                <h3 className="display-font text-xl font-bold text-white mb-3">Full Service</h3>
+                <p className="text-white/45 text-sm leading-relaxed mb-5">
+                  Active lead generation. Every add-on and bundle below is available and
+                  billed only during these months.
+                </p>
+
+                <AnimatePresence mode="wait">
+                  {isAnnual ? (
+                    <motion.div
+                      key="annual-price"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="text-white/30 text-sm line-through mb-0.5">
+                        ${(BASE_PRICE * 12).toLocaleString()}/yr
+                      </div>
+                      <div className="text-4xl font-black gradient-text leading-none">
+                        ${toAnnual(BASE_PRICE).toLocaleString()}
+                      </div>
+                      <div className="text-white/40 text-sm mt-1">per year</div>
+                      <div className="text-xs font-bold mt-2 px-2.5 py-1 rounded-full inline-block"
+                        style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)", color: "#4ade80" }}>
+                        Save ${annualSavings(BASE_PRICE).toLocaleString()}/yr
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="monthly-price"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="text-4xl font-black gradient-text leading-none">${BASE_PRICE}</div>
+                      <div className="text-white/40 text-sm mt-1">per month</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Off-Season Maintenance */}
+              <div
+                className={`${cardBase} p-7`}
+                style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
+              >
+                <div className="mb-3">
+                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white/60"
+                    style={{ background: "rgba(255,255,255,0.06)" }}>
+                    Apr – Aug
+                  </span>
                 </div>
+
+                <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2">off-season</p>
+                <h3 className="display-font text-xl font-bold text-white mb-3">Off-Season Maintenance</h3>
+                <p className="text-white/45 text-sm leading-relaxed mb-5">
+                  Your site stays live and hosted with no active lead-gen work. Add-ons and
+                  bundles are paused by default — want to keep one running through the
+                  off-season instead? Just say so and we&apos;ll keep it active.
+                </p>
+
+                <div className="text-4xl font-black text-white/80 leading-none">${OFF_SEASON_PRICE}</div>
+                <div className="text-white/40 text-sm mt-1">per month</div>
               </div>
             </div>
 
@@ -248,8 +279,10 @@ export default function Pricing() {
                 style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", color: "#4ade80" }}>
                 🛡 The guarantee: Live in 7 days or your first month is free.*
               </span>
-              <p className="text-white/20 text-xs">
+              <p className="text-white/20 text-xs text-center max-w-md">
                 * Base website only. Add-on services (SEO, CRM, automations) require additional setup time.
+                The ${OFF_SEASON_PRICE}/mo off-season rate applies to the base site only — bundles and
+                individual add-ons below are Full Service (Sep–Mar) pricing.
               </p>
             </div>
           </div>
@@ -408,12 +441,13 @@ export default function Pricing() {
             <p className="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2">
               your {isAnnual ? "annual" : "monthly"} total
             </p>
-            <h3 className="display-font text-2xl font-bold text-white mb-7">Here&apos;s What You&apos;re Looking At</h3>
+            <h3 className="display-font text-2xl font-bold text-white mb-1">Here&apos;s What You&apos;re Looking At</h3>
+            <p className="text-white/30 text-xs mb-6">Full Service (Sep–Mar) pricing — add-ons and bundles aren&apos;t available during Off-Season Maintenance.</p>
 
             <div className={`${cardBase} ${cardOff} p-7`}>
               <div className="space-y-3 mb-5">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/60">Firewood Business Website</span>
+                  <span className="text-white/60">Firewood Business Website (Full Service)</span>
                   <motion.span
                     key={`base-${isAnnual}`}
                     initial={{ opacity: 0 }}
@@ -570,7 +604,7 @@ export default function Pricing() {
                     </div>
                   )}
                   <div className="flex justify-between text-sm">
-                    <span className="text-white/50">Firewood Business Website</span>
+                    <span className="text-white/50">Firewood Business Website (Full Service)</span>
                     <span className="text-white">
                       {isAnnual ? `$${toAnnual(BASE_PRICE).toLocaleString()}/yr` : `$${BASE_PRICE}/mo`}
                     </span>
