@@ -2,12 +2,10 @@ import { NextResponse } from "next/server";
 import { SquareClient, SquareEnvironment, SquareError } from "square";
 import type { Square } from "square";
 import { randomUUID } from "crypto";
-import { BASE_PRICE, findAddon, findBundle } from "@/lib/pricing";
+import { BASE_PRICE, ORDERING_MACHINE_PRICE, ORDERING_MACHINE_SETUP_FEE } from "@/lib/pricing";
 
 interface CheckoutBody {
-  planType: string;
-  addons: string[]; // individual add-on ids (excluded from bundle)
-  bundleId: string | null;
+  addOrderingMachine: boolean;
   customerEmail: string;
   customerName: string;
 }
@@ -27,34 +25,26 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: false, error: "Invalid request body" }, { status: 400 });
   }
 
-  const { addons = [], bundleId, customerEmail, customerName } = body;
+  const { addOrderingMachine, customerEmail, customerName } = body;
 
   const lineItems: Square.OrderLineItem[] = [];
 
   lineItems.push({
-    name: "Firewood Website — Professional Website (Monthly)",
+    name: "Firewood Website — Website Plan (Monthly)",
     quantity: "1",
     basePriceMoney: { amount: BigInt(BASE_PRICE * 100), currency: "USD" as Square.Currency },
   });
 
-  const bundle = bundleId ? findBundle(bundleId) : undefined;
-  if (bundle) {
+  if (addOrderingMachine) {
     lineItems.push({
-      name: `${bundle.name} (Monthly)`,
+      name: "The Ordering Machine (Monthly)",
       quantity: "1",
-      basePriceMoney: { amount: BigInt(bundle.bundlePrice * 100), currency: "USD" as Square.Currency },
+      basePriceMoney: { amount: BigInt(ORDERING_MACHINE_PRICE * 100), currency: "USD" as Square.Currency },
     });
-  }
-
-  const bundleIncludes = bundle?.addonIds ?? [];
-  for (const id of addons) {
-    if (bundleIncludes.includes(id)) continue; // already covered by bundle
-    const addon = findAddon(id);
-    if (!addon) continue;
     lineItems.push({
-      name: `${addon.name} (Monthly)`,
+      name: "The Ordering Machine — One-Time Setup",
       quantity: "1",
-      basePriceMoney: { amount: BigInt(addon.price * 100), currency: "USD" as Square.Currency },
+      basePriceMoney: { amount: BigInt(ORDERING_MACHINE_SETUP_FEE * 100), currency: "USD" as Square.Currency },
     });
   }
 

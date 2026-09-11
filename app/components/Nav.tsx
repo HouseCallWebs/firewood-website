@@ -5,7 +5,7 @@ import Link from "next/link";
 import Wordmark from "./Wordmark";
 
 const navLinks = [
-  { label: "Services", href: "/#services" },
+  { label: "Live Demo", href: "/live-demo" },
   { label: "How It Works", href: "/#how-it-works" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },

@@ -4,11 +4,16 @@ import { useState } from "react";
 const inputClass =
   "w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-[#8b1a0f]/50 transition-colors";
 const inputStyle = { background: "rgba(255,255,255,0.05)" };
-const selectStyle = { background: "#1b130e" };
+
+// internalNote is never shown to the visitor — it's a placeholder field for
+// internal tagging (e.g. lead source, campaign) that a future workflow can
+// set programmatically before submit. Not wired up yet; see note near the
+// fetch call below.
+const HIDDEN_INTERNAL_NOTE = "";
 
 export default function FinalCTA() {
   const [fields, setFields] = useState({
-    name: "", business: "", phone: "", bestTime: "", deliveryArea: "", message: "",
+    name: "", business: "", phone: "", email: "", currentWebsite: "", cordsPerSeason: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Partial<Record<keyof typeof fields, string>>>({});
@@ -22,7 +27,7 @@ export default function FinalCTA() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const required: (keyof typeof fields)[] = ["name", "business", "phone", "bestTime", "deliveryArea"];
+    const required: (keyof typeof fields)[] = ["name", "business", "phone", "email", "cordsPerSeason"];
     const newErrors: Partial<Record<keyof typeof fields, string>> = {};
     required.forEach((k) => {
       if (!fields[k].trim()) newErrors[k] = "This field is required.";
@@ -34,14 +39,16 @@ export default function FinalCTA() {
 
     setStatus("loading");
     try {
+      // internalNote rides along for future use (personalized video outreach
+      // tagging) — see HIDDEN_INTERNAL_NOTE above. Not surfaced to the visitor.
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(fields),
+        body: JSON.stringify({ ...fields, internalNote: HIDDEN_INTERNAL_NOTE }),
       });
       if (!res.ok) throw new Error();
       setStatus("success");
-      setFields({ name: "", business: "", phone: "", bestTime: "", deliveryArea: "", message: "" });
+      setFields({ name: "", business: "", phone: "", email: "", currentWebsite: "", cordsPerSeason: "" });
     } catch {
       setStatus("error");
     }
@@ -95,7 +102,7 @@ export default function FinalCTA() {
             className="reveal-right rounded-3xl p-8 border border-white/8"
             style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)", animationDelay: "0.15s" }}
           >
-            <h3 className="text-white font-bold text-xl mb-1">Get your free quote</h3>
+            <h3 className="text-white font-bold text-xl mb-1">Get your free ordering demo</h3>
             <p className="text-white/35 text-sm mb-7">We&apos;ll reply within 1 business day.</p>
 
             {status === "success" ? (
@@ -158,45 +165,41 @@ export default function FinalCTA() {
                   </div>
                   <div>
                     <label className="block text-xs font-medium text-white/40 mb-1.5">
-                      Best Time to Call <span className="text-[#b0271a]">*</span>
+                      Email <span className="text-[#b0271a]">*</span>
                     </label>
-                    <select
-                      required
-                      value={fields.bestTime} onChange={set("bestTime")}
-                      className={inputClass} style={selectStyle}
-                    >
-                      <option value="">Select a time...</option>
-                      <option>Morning (8am–12pm)</option>
-                      <option>Afternoon (12pm–5pm)</option>
-                      <option>Evening (5pm–8pm)</option>
-                    </select>
-                    {errors.bestTime && <p className="text-red-400 text-xs mt-1">{errors.bestTime}</p>}
+                    <input
+                      type="email" required
+                      placeholder="john@smithsfirewood.com"
+                      value={fields.email} onChange={set("email")}
+                      className={inputClass} style={inputStyle}
+                    />
+                    {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-white/40 mb-1.5">
-                    Delivery Area <span className="text-[#b0271a]">*</span>
+                    Current Website <span className="text-white/20">(optional)</span>
                   </label>
                   <input
-                    type="text" required
-                    placeholder="e.g. within 30 miles of Springfield, MO"
-                    value={fields.deliveryArea} onChange={set("deliveryArea")}
+                    type="text"
+                    placeholder="e.g. facebook.com/smithsfirewood, or none"
+                    value={fields.currentWebsite} onChange={set("currentWebsite")}
                     className={inputClass} style={inputStyle}
                   />
-                  {errors.deliveryArea && <p className="text-red-400 text-xs mt-1">{errors.deliveryArea}</p>}
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-white/40 mb-1.5">
-                    Anything else? <span className="text-white/20">(optional)</span>
+                    Approximate Cords per Season <span className="text-[#b0271a]">*</span>
                   </label>
-                  <textarea
-                    rows={3}
-                    placeholder="Cord pricing, stacking service, seasonal pre-orders, anything we should know..."
-                    value={fields.message} onChange={set("message")}
-                    className={`${inputClass} resize-none`} style={inputStyle}
+                  <input
+                    type="text" required
+                    placeholder="e.g. 60 cords"
+                    value={fields.cordsPerSeason} onChange={set("cordsPerSeason")}
+                    className={inputClass} style={inputStyle}
                   />
+                  {errors.cordsPerSeason && <p className="text-red-400 text-xs mt-1">{errors.cordsPerSeason}</p>}
                 </div>
 
                 {status === "error" && (
@@ -214,7 +217,7 @@ export default function FinalCTA() {
                     boxShadow: "0 0 30px rgba(139,26,15,0.25)",
                   }}
                 >
-                  {status === "loading" ? "Sending…" : "Check Availability →"}
+                  {status === "loading" ? "Sending…" : "Get My Free Ordering Demo →"}
                 </button>
 
                 <p className="text-center text-white/20 text-xs">

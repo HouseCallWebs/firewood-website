@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BASE_PRICE } from "@/lib/pricing";
+import { BASE_PRICE, ORDERING_MACHINE_PRICE } from "@/lib/pricing";
 
 const steps = [
   {
@@ -19,16 +19,16 @@ const steps = [
   },
   {
     num: "02",
-    tag: "Step 2 — Keep Growing",
-    price: "Add-ons",
-    priceSub: "from $75/mo",
-    title: "Supercharge Your Results",
-    desc: "Layer on powerful add-ons — Local SEO, Google Business Profile, delivery CRM, AI receptionist, and more. Pick what fits your budget. Cancel anytime.",
+    tag: "Step 2 — Stop Taking Orders by Hand",
+    price: `+$${ORDERING_MACHINE_PRICE}`,
+    priceSub: "/mo",
+    title: "Add the Ordering Machine",
+    desc: "Your site takes the order, texts the confirmation, and reorders every past customer come fall — so you're not chasing calls and DMs between deliveries.",
     bullets: [
-      "Local SEO to rank for \"firewood near me\"",
-      "Google Business Profile optimization",
-      "Delivery CRM & repeat-customer pipeline",
-      "AI phone receptionist (24/7)",
+      "Online ordering — species, quantity, delivery windows",
+      "SMS booking confirmation & delivery reminders",
+      "Fall Reorder Engine — one-tap seasonal reorders",
+      "Review autopilot + missed-call text-back",
     ],
   },
 ];
@@ -104,7 +104,7 @@ export default function HowItWorks() {
               href="/pricing"
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#b0271a] hover:text-[#c9432c] transition-colors"
             >
-              View full pricing & add-ons
+              View full pricing
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

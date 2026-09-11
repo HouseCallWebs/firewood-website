@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const stats = [
-  { value: "7-Day", label: "Avg. Delivery" },
+  { value: "7-Day", label: "Live" },
+  { value: "1-Tap", label: "Reorder Texts" },
   { value: "$197", label: "Starting Price" },
-  { value: "🪵", label: "Built For Firewood" },
   { value: "🇺🇸 USA", label: "Built & Supported" },
 ];
 
@@ -34,36 +34,46 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-fade-2 display-font text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.06] tracking-tight text-white mb-6">
-          A Website That Sells Cords<br />
+          A Website That Takes the Order<br />
           <span className="gradient-text">While You&apos;re Out on Delivery.</span>
         </h1>
 
-        <p className="hero-fade-3 text-base sm:text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-10">
-          Custom-built websites for firewood, cordwood, and stacking businesses.
-          Online ordering, delivery radius maps, and seasonal pricing — done for
-          you and live in 7 days or less.
+        <p className="hero-fade-3 text-base sm:text-lg text-white/50 max-w-2xl mx-auto leading-relaxed mb-6">
+          We build the site. Then we add the Ordering Machine — online ordering
+          and a Fall Reorder Engine that texts every past customer each season
+          so they rebuy without you lifting a finger.
         </p>
+
+        <div className="hero-fade-3 flex flex-wrap justify-center gap-3 mb-10">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white/60 border border-white/10">
+            🪵 Pays for itself with 2 extra cords a month
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#c9432c] border"
+            style={{ background: "rgba(139,26,15,0.10)", borderColor: "rgba(139,26,15,0.25)" }}>
+            ❄️ Get live before the first cold snap
+          </span>
+        </div>
 
         <div className="hero-fade-4 flex flex-col items-center gap-4 mb-10">
           <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
             <Link
-              href="/contact"
+              href="/live-demo"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-bold text-white transition-all hover:scale-105 hover:brightness-110 shadow-xl"
               style={{
                 background: "linear-gradient(135deg, #8b1a0f, #c9432c)",
                 boxShadow: "0 0 40px rgba(139,26,15,0.30)",
               }}
             >
-              Book a Free 15-Min Call
+              Try the Live Demo
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
             <Link
-              href="/#portfolio"
+              href="/contact"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-base font-semibold text-white border border-white/10 hover:border-white/22 hover:bg-white/5 transition-all"
             >
-              See a Sample Site
+              Book a Free 15-Min Call
             </Link>
           </div>
 

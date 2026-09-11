@@ -1,27 +1,26 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { BASE_PRICE, OFF_SEASON_PRICE, ADDONS, BUNDLES } from "@/lib/pricing";
+import {
+  BASE_PRICE,
+  ORDERING_MACHINE_PRICE,
+  ORDERING_MACHINE_SETUP_FEE,
+  BUNDLE_TOTAL,
+  OFF_SEASON_PRICE,
+  VALUE_STACK,
+  VALUE_STACK_TOTAL,
+} from "@/lib/pricing";
 
 // UPDATE THIS NUMBER MANUALLY EACH MONTH
 const SPOTS_LEFT = 2;
 
-function toAnnual(monthly: number) {
-  return Math.round(monthly * 12 * 0.75);
-}
-function annualSavings(monthly: number) {
-  return Math.round(monthly * 12 * 0.25);
-}
-
 export default function Pricing() {
   const router = useRouter();
 
-  const [isAnnual, setIsAnnual] = useState(false);
-  const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
-  const [selectedBundle, setSelectedBundle] = useState<string | null>(null);
+  const [addOrderingMachine, setAddOrderingMachine] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalName, setModalName] = useState("");
   const [modalEmail, setModalEmail] = useState("");
@@ -31,35 +30,7 @@ export default function Pricing() {
   const [tosChecked, setTosChecked] = useState(false);
   const [tosDrawerOpen, setTosDrawerOpen] = useState(false);
 
-  function toggleAddon(id: string) {
-    setSelectedBundle(null);
-    setSelectedAddons((prev) =>
-      prev.includes(id) ? prev.filter((a) => a !== id) : [...prev, id]
-    );
-  }
-
-  function toggleBundle(id: string) {
-    setSelectedAddons([]);
-    setSelectedBundle((prev) => (prev === id ? null : id));
-  }
-
-  const monthlyTotal = useMemo(() => {
-    let t = BASE_PRICE;
-    if (selectedBundle) {
-      const b = BUNDLES.find((b) => b.id === selectedBundle);
-      if (b) t += b.bundlePrice;
-    } else {
-      selectedAddons.forEach((id) => {
-        const a = ADDONS.find((a) => a.id === id);
-        if (a) t += a.price;
-      });
-    }
-    return t;
-  }, [selectedAddons, selectedBundle]);
-
-  const displayTotal = isAnnual ? toAnnual(monthlyTotal) : monthlyTotal;
-  const totalSavings = isAnnual ? annualSavings(monthlyTotal) : 0;
-  const activeBundle = BUNDLES.find((b) => b.id === selectedBundle);
+  const monthlyTotal = addOrderingMachine ? BUNDLE_TOTAL : BASE_PRICE;
 
   async function handleCheckout(e: React.FormEvent) {
     e.preventDefault();
@@ -74,10 +45,7 @@ export default function Pricing() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          planType: "Professional Website",
-          addons: selectedAddons,
-          bundleId: selectedBundle,
-          isAnnual,
+          addOrderingMachine,
           customerEmail: modalEmail,
           customerName: modalName,
         }),
@@ -90,9 +58,7 @@ export default function Pricing() {
     }
   }
 
-  const cardBase = "rounded-2xl border transition-all duration-200";
-  const cardOff = "border-white/7 bg-white/[0.025]";
-  const cardOn = "border-[#8b1a0f]/60 bg-[#8b1a0f]/[0.06]";
+  const cardBase = "rounded-2xl border transition-all duration-300";
 
   return (
     <div style={{ background: "#130d0a", minHeight: "100vh" }}>
@@ -114,433 +80,214 @@ export default function Pricing() {
             </span>
           </div>
 
-          <div className="flex flex-col items-center gap-3">
-            <div
-              className="inline-flex items-center p-1 rounded-2xl border border-white/8"
-              style={{ background: "rgba(255,255,255,0.03)" }}
-            >
-              <button
-                onClick={() => setIsAnnual(false)}
-                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 ${
-                  !isAnnual ? "text-white shadow-lg" : "text-white/40 hover:text-white/70"
-                }`}
-                style={!isAnnual ? { background: "linear-gradient(135deg, #8b1a0f, #c9432c)" } : {}}
-              >
-                Monthly
-              </button>
-
-              <button
-                onClick={() => setIsAnnual(true)}
-                className={`relative px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 flex items-center gap-2.5 ${
-                  isAnnual ? "text-white shadow-lg" : "text-white/40 hover:text-white/70"
-                }`}
-                style={isAnnual ? { background: "linear-gradient(135deg, #8b1a0f, #c9432c)" } : {}}
-              >
-                Annual
-                <span
-                  className="text-[10px] font-black px-1.5 py-0.5 rounded-md tracking-wide"
-                  style={
-                    isAnnual
-                      ? { background: "rgba(0,0,0,0.18)", color: "rgba(0,0,0,0.65)" }
-                      : { background: "rgba(34,197,94,0.15)", color: "#4ade80" }
-                  }
-                >
-                  Save 25%
-                </span>
-              </button>
-            </div>
-
-            <AnimatePresence>
-              {isAnnual && (
-                <motion.p
-                  key="annual-label"
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.18 }}
-                  className="text-xs text-white/35 text-center"
-                >
-                  Billed once per year — cancel anytime.
-                </motion.p>
-              )}
-            </AnimatePresence>
+          <div className="text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">simple pricing</p>
+            <h1 className="display-font text-3xl sm:text-4xl font-bold text-white mb-3">A Website, or a Website That Takes Orders.</h1>
+            <p className="text-white/45 text-base max-w-xl mx-auto">
+              Start with a website. Add the ordering machine when you&apos;re ready to
+              stop taking orders one phone call at a time.
+            </p>
           </div>
 
+          {/* Two-card offer */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2 text-center">seasonal pricing</p>
-            <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-2 text-center">One Website, Priced for the Season</h2>
-            <p className="text-white/40 text-sm text-center max-w-xl mx-auto mb-7">
-              Firewood is a seasonal business — your site cost should be too. Full lead-gen
-              pricing runs September through March; an off-season maintenance rate keeps
-              your site live the rest of the year.
-            </p>
-
             <div className="grid md:grid-cols-2 gap-4">
-              {/* Full Service */}
-              <div
-                className={`${cardBase} p-7 transition-all duration-300`}
+              {/* Website Plan */}
+              <button
+                type="button"
+                onClick={() => setAddOrderingMachine(false)}
+                className={`${cardBase} p-7 text-left w-full`}
                 style={{
-                  borderColor: isAnnual ? "rgba(176,39,26,0.55)" : "rgba(139,26,15,0.45)",
-                  background: isAnnual ? "rgba(176,39,26,0.04)" : "rgba(139,26,15,0.04)",
+                  borderColor: !addOrderingMachine ? "rgba(176,39,26,0.55)" : "rgba(255,255,255,0.08)",
+                  background: !addOrderingMachine ? "rgba(176,39,26,0.04)" : "rgba(255,255,255,0.02)",
                 }}
               >
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white"
-                    style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
-                    Sep – Mar
-                  </span>
-                  <AnimatePresence>
-                    {isAnnual && (
-                      <motion.span
-                        key="best-value"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        transition={{ duration: 0.2 }}
-                        className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full"
-                        style={{ background: "rgba(34,197,94,0.12)", color: "#4ade80" }}
-                      >
-                        ★ Best Value
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">your anchor</p>
-                <h3 className="display-font text-xl font-bold text-white mb-3">Full Service</h3>
+                <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-2">the basics</p>
+                <h2 className="display-font text-xl font-bold text-white mb-3">Website Plan</h2>
                 <p className="text-white/45 text-sm leading-relaxed mb-5">
-                  Active lead generation. Every add-on and bundle below is available and
-                  billed only during these months.
+                  A custom-built site with your cord pricing and delivery area on it.
+                  Nothing fancy — just a real website that makes you look like the
+                  business you are.
                 </p>
+                <div className="mb-5">
+                  <span className="text-4xl font-black text-white leading-none">${BASE_PRICE}</span>
+                  <span className="text-white/40 text-sm ml-1">/mo</span>
+                </div>
+                <ul className="space-y-2">
+                  {["Custom-built site", "No setup fee", "Live in 7 days"].map((item) => (
+                    <li key={item} className="flex items-center gap-2.5 text-sm text-white/60">
+                      <span className="text-white/30 flex-shrink-0">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </button>
 
-                <AnimatePresence mode="wait">
-                  {isAnnual ? (
+              {/* Ordering Machine */}
+              <button
+                type="button"
+                onClick={() => setAddOrderingMachine(true)}
+                className={`${cardBase} p-7 text-left w-full relative`}
+                style={{
+                  borderColor: addOrderingMachine ? "rgba(176,39,26,0.6)" : "rgba(139,26,15,0.3)",
+                  background: addOrderingMachine ? "rgba(139,26,15,0.07)" : "rgba(139,26,15,0.03)",
+                }}
+              >
+                <div className="absolute -top-3 left-6">
+                  <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full text-white"
+                    style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
+                    Most Businesses Start Here
+                  </span>
+                </div>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2 mt-2">website + ordering</p>
+                <h2 className="display-font text-xl font-bold text-white mb-3">The Ordering Machine</h2>
+                <p className="text-white/45 text-sm leading-relaxed mb-5">
+                  Everything in the Website Plan, plus the system that takes and
+                  reorders for you — so you spend less time on the phone and more
+                  time on the truck.
+                </p>
+                <div className="mb-1">
+                  <span className="text-4xl font-black gradient-text leading-none">${BUNDLE_TOTAL}</span>
+                  <span className="text-white/40 text-sm ml-1">/mo</span>
+                </div>
+                <p className="text-white/35 text-xs mb-5">
+                  Website Plan (${BASE_PRICE}/mo) + Ordering Machine (+${ORDERING_MACHINE_PRICE}/mo) · ${ORDERING_MACHINE_SETUP_FEE} one-time setup
+                </p>
+                <ul className="space-y-2">
+                  {["Online ordering — species, quantity, delivery windows", "SMS booking & delivery reminders", "Fall Reorder Engine", "Review autopilot + missed-call text-back"].map((item) => (
+                    <li key={item} className="flex items-center gap-2.5 text-sm text-white/70">
+                      <span className="text-[#b0271a] flex-shrink-0">✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </button>
+            </div>
+          </div>
+
+          {/* 60-day guarantee — core trust element, kept prominent and on its own */}
+          <div className="rounded-2xl border p-7 flex flex-col sm:flex-row items-start sm:items-center gap-5"
+            style={{ background: "rgba(34,197,94,0.05)", borderColor: "rgba(34,197,94,0.25)" }}>
+            <div className="w-11 h-11 rounded-full flex items-center justify-center text-xl flex-shrink-0"
+              style={{ background: "rgba(34,197,94,0.12)" }}>
+              🛡
+            </div>
+            <div>
+              <p className="text-white font-bold text-base mb-1">The 60-day guarantee</p>
+              <p className="text-white/50 text-sm leading-relaxed">
+                Try the Ordering Machine for 60 days. If it doesn&apos;t pay for itself,
+                you drop back to the ${BASE_PRICE}/mo Website Plan — no hard feelings.
+              </p>
+            </div>
+          </div>
+
+          {/* Value stack */}
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2 text-center">what you&apos;re actually getting</p>
+            <h2 className="display-font text-2xl sm:text-3xl font-bold text-white mb-7 text-center">Here&apos;s the Whole Stack.</h2>
+
+            <div className="rounded-2xl border border-white/8 overflow-hidden" style={{ background: "rgba(255,255,255,0.02)" }}>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm min-w-[480px]">
+                  <thead>
+                    <tr className="border-b border-white/8">
+                      <th className="text-left px-6 py-4 text-white/40 text-xs font-bold uppercase tracking-widest">What&apos;s Included</th>
+                      <th className="text-right px-6 py-4 text-white/40 text-xs font-bold uppercase tracking-widest">Stated Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {VALUE_STACK.map((row) => (
+                      <tr key={row.label} className="border-b border-white/5">
+                        <td className="px-6 py-4">
+                          <p className="text-white font-semibold">
+                            {row.label}
+                            {row.activatesLater && (
+                              <span className="ml-2 text-[10px] font-bold uppercase tracking-wide text-white/30 align-middle">
+                                activates once your account is set up
+                              </span>
+                            )}
+                          </p>
+                          {row.desc && <p className="text-white/40 text-xs mt-0.5">{row.desc}</p>}
+                        </td>
+                        <td className="px-6 py-4 text-right text-white/70 font-semibold whitespace-nowrap">
+                          ${row.value.toLocaleString()}
+                        </td>
+                      </tr>
+                    ))}
+                    <tr className="border-b border-white/8">
+                      <td className="px-6 py-4 text-white/50 text-sm">Total value</td>
+                      <td className="px-6 py-4 text-right text-white/50 text-sm line-through whitespace-nowrap">
+                        ${VALUE_STACK_TOTAL.toLocaleString()}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-5 text-white font-black">Today</td>
+                      <td className="px-6 py-5 text-right whitespace-nowrap">
+                        <span className="gradient-text font-black text-lg">${BUNDLE_TOTAL}/mo</span>
+                        <span className="block text-white/35 text-xs mt-0.5">less than 2 cords</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <p className="text-white/20 text-xs text-center mt-4 max-w-md mx-auto leading-relaxed">
+              SMS features require a registered business (EIN) due to carrier regulations.
+            </p>
+          </div>
+
+          {/* Order summary + CTA */}
+          <div>
+            <div className={`${cardBase} border-white/7 p-7`} style={{ background: "rgba(255,255,255,0.025)" }}>
+              <div className="space-y-3 mb-5">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-white/60">Website Plan</span>
+                  <span className="text-white font-semibold">${BASE_PRICE}/mo</span>
+                </div>
+                <AnimatePresence>
+                  {addOrderingMachine && (
                     <motion.div
-                      key="annual-price"
-                      initial={{ opacity: 0, y: 8 }}
+                      key="ordering-machine-line"
+                      initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.2 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      className="flex items-center justify-between text-sm"
                     >
-                      <div className="text-white/30 text-sm line-through mb-0.5">
-                        ${(BASE_PRICE * 12).toLocaleString()}/yr
-                      </div>
-                      <div className="text-4xl font-black gradient-text leading-none">
-                        ${toAnnual(BASE_PRICE).toLocaleString()}
-                      </div>
-                      <div className="text-white/40 text-sm mt-1">per year</div>
-                      <div className="text-xs font-bold mt-2 px-2.5 py-1 rounded-full inline-block"
-                        style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)", color: "#4ade80" }}>
-                        Save ${annualSavings(BASE_PRICE).toLocaleString()}/yr
-                      </div>
+                      <span className="text-white/60">The Ordering Machine</span>
+                      <span className="text-white font-semibold">+${ORDERING_MACHINE_PRICE}/mo</span>
                     </motion.div>
-                  ) : (
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {addOrderingMachine && (
                     <motion.div
-                      key="monthly-price"
-                      initial={{ opacity: 0, y: 8 }}
+                      key="setup-fee-line"
+                      initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.2 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      className="flex items-center justify-between text-sm"
                     >
-                      <div className="text-4xl font-black gradient-text leading-none">${BASE_PRICE}</div>
-                      <div className="text-white/40 text-sm mt-1">per month</div>
+                      <span className="text-white/40">One-time setup fee</span>
+                      <span className="text-white/70 font-semibold">${ORDERING_MACHINE_SETUP_FEE}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
 
-              {/* Off-Season Maintenance */}
-              <div
-                className={`${cardBase} p-7`}
-                style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
-              >
-                <div className="mb-3">
-                  <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white/60"
-                    style={{ background: "rgba(255,255,255,0.06)" }}>
-                    Apr – Aug
-                  </span>
-                </div>
-
-                <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2">off-season</p>
-                <h3 className="display-font text-xl font-bold text-white mb-3">Off-Season Maintenance</h3>
-                <p className="text-white/45 text-sm leading-relaxed mb-3">
-                  We know firewood is seasonal, so let us cut you a break. Just need
-                  maintenance over the summer? We&apos;ve got you covered — your site stays
-                  live and ready for when the cold comes back.
-                </p>
-                <p className="text-white/35 text-xs leading-relaxed mb-5">
-                  Want to keep an add-on running through the off-season? Just say so and
-                  we&apos;ll keep it active.
-                </p>
-
-                <div className="text-4xl font-black text-white/80 leading-none">${OFF_SEASON_PRICE}</div>
-                <div className="text-white/40 text-sm mt-1">per month</div>
-              </div>
-            </div>
-
-            <div className="mt-3 flex flex-col items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold"
-                style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", color: "#4ade80" }}>
-                🛡 The guarantee: Live in 7 days or your first month is free.*
-              </span>
-              <p className="text-white/20 text-xs text-center max-w-md">
-                * Base website only. Add-on services (SEO, CRM, automations) require additional setup time.
-                The ${OFF_SEASON_PRICE}/mo off-season rate applies to the base site only — bundles and
-                individual add-ons below are Full Service (Sep–Mar) pricing.
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">individual add-ons</p>
-            <h3 className="display-font text-2xl font-bold text-white mb-2">Supercharge Your Results</h3>
-            <p className="text-white/40 text-sm mb-7">
-              Add any of these on top of your base plan.
-              {isAnnual && (
-                <span className="text-green-400/70"> All prices shown at 25% annual discount.</span>
-              )}
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-3">
-              {ADDONS.map((addon) => {
-                const on = selectedAddons.includes(addon.id);
-                const displayPrice = isAnnual
-                  ? `$${toAnnual(addon.price).toLocaleString()}/yr`
-                  : `+$${addon.price}/mo`;
-                const strikePrice = isAnnual
-                  ? `$${(addon.price * 12).toLocaleString()}/yr`
-                  : null;
-
-                return (
-                  <button
-                    key={addon.id}
-                    onClick={() => toggleAddon(addon.id)}
-                    className={`${cardBase} ${on ? cardOn : cardOff} w-full text-left px-5 py-4 flex items-center gap-4 hover:border-[#8b1a0f]/40 cursor-pointer`}
-                  >
-                    <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center border-2 transition-all duration-200 ${
-                      on ? "border-[#b0271a] bg-[#b0271a]" : "border-white/20 bg-transparent"
-                    }`}>
-                      {on && (
-                        <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </div>
-                    <span className="flex-1 min-w-0">
-                      <span className={`block text-sm font-semibold transition-colors ${on ? "text-white" : "text-white/65"}`}>
-                        {addon.name}
-                      </span>
-                      {addon.description && (
-                        <span className="block text-xs text-white/35 mt-0.5 leading-relaxed">
-                          {addon.description}
-                        </span>
-                      )}
-                    </span>
-                    <div className="text-right flex-shrink-0">
-                      {strikePrice && (
-                        <div className="text-white/25 text-xs line-through leading-tight">{strikePrice}</div>
-                      )}
-                      <span className={`text-sm font-black transition-colors ${on ? "gradient-text" : "text-white/35"}`}>
-                        {displayPrice}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">or choose a bundle</p>
-            <h3 className="display-font text-2xl font-bold text-white mb-2">Save More with a Bundle</h3>
-            <p className="text-white/40 text-sm mb-7">
-              Bundles replace individual add-on selections. Billed {isAnnual ? "annually" : "monthly"} on top of your base plan.
-            </p>
-
-            <div className="grid md:grid-cols-2 gap-4 max-w-2xl">
-              {BUNDLES.map((bundle) => {
-                const on = selectedBundle === bundle.id;
-                const displayPrice = isAnnual
-                  ? `$${toAnnual(bundle.bundlePrice).toLocaleString()}/yr`
-                  : `$${bundle.bundlePrice}/mo`;
-                const strikePrice = isAnnual
-                  ? `$${(bundle.bundlePrice * 12).toLocaleString()}/yr`
-                  : `$${bundle.originalPrice}/mo`;
-                const savingsLabel = isAnnual
-                  ? `save $${annualSavings(bundle.bundlePrice).toLocaleString()}/yr`
-                  : `save $${bundle.savings}/mo`;
-
-                return (
-                  <button
-                    key={bundle.id}
-                    onClick={() => toggleBundle(bundle.id)}
-                    className={`${cardBase} ${
-                      bundle.popular
-                        ? on
-                          ? "border-[#b0271a]/80 bg-[#8b1a0f]/[0.07]"
-                          : "border-[#8b1a0f]/35 bg-[#8b1a0f]/[0.03]"
-                        : on ? cardOn : cardOff
-                    } w-full text-left p-6 flex flex-col gap-4 hover:border-[#8b1a0f]/40 relative`}
-                  >
-                    {bundle.popular && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                        <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full text-white"
-                          style={{ background: "linear-gradient(135deg, #8b1a0f, #c9432c)" }}>
-                          Most Popular
-                        </span>
-                      </div>
-                    )}
-
-                    <div>
-                      <h4 className={`text-base font-black mb-3 transition-colors ${on ? "text-white" : "text-white/80"}`}>
-                        {bundle.name}
-                      </h4>
-                      <ul className="space-y-1.5">
-                        {bundle.includes.map((item) => (
-                          <li key={item} className="flex items-center gap-2 text-xs text-white/45">
-                            <span className="text-[#b0271a]/60 flex-shrink-0">✓</span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="mt-auto pt-2 border-t border-white/6">
-                      <div className="flex items-end justify-between gap-2">
-                        <div>
-                          <div className="text-white/30 text-xs line-through">{strikePrice}</div>
-                          <motion.div
-                            key={`${bundle.id}-${isAnnual}`}
-                            initial={{ opacity: 0, y: 4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.18 }}
-                            className={`text-2xl font-black transition-colors ${on ? "gradient-text" : "text-white/80"}`}
-                          >
-                            {displayPrice}
-                          </motion.div>
-                        </div>
-                        <span className="text-xs font-bold px-2.5 py-1 rounded-full"
-                          style={{ background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.2)", color: "#4ade80" }}>
-                          {savingsLabel}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className={`absolute top-4 right-4 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
-                      on ? "border-[#b0271a] bg-[#b0271a]" : "border-white/20"
-                    }`}>
-                      {on && (
-                        <svg className="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[#b0271a] mb-2">
-              your {isAnnual ? "annual" : "monthly"} total
-            </p>
-            <h3 className="display-font text-2xl font-bold text-white mb-1">Here&apos;s What You&apos;re Looking At</h3>
-            <p className="text-white/30 text-xs mb-6">Full Service (Sep–Mar) pricing — add-ons and bundles aren&apos;t available during Off-Season Maintenance.</p>
-
-            <div className={`${cardBase} ${cardOff} p-7`}>
-              <div className="space-y-3 mb-5">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/60">Firewood Business Website (Full Service)</span>
-                  <motion.span
-                    key={`base-${isAnnual}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.15 }}
-                    className="text-white font-semibold"
-                  >
-                    {isAnnual
-                      ? `$${toAnnual(BASE_PRICE).toLocaleString()}/yr`
-                      : `$${BASE_PRICE}/mo`}
-                  </motion.span>
-                </div>
-
-                {activeBundle && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center justify-between text-sm"
-                  >
-                    <span className="text-white/60">{activeBundle.name}</span>
-                    <span className="text-white font-semibold">
-                      {isAnnual
-                        ? `+$${toAnnual(activeBundle.bundlePrice).toLocaleString()}/yr`
-                        : `+$${activeBundle.bundlePrice}/mo`}
-                    </span>
-                  </motion.div>
-                )}
-
-                <AnimatePresence>
-                  {selectedAddons.map((id) => {
-                    const addon = ADDONS.find((a) => a.id === id);
-                    if (!addon) return null;
-                    return (
-                      <motion.div
-                        key={id}
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
-                        className="flex items-center justify-between text-sm"
-                      >
-                        <span className="text-white/60">{addon.name}</span>
-                        <span className="text-white font-semibold">
-                          {isAnnual
-                            ? `+$${toAnnual(addon.price).toLocaleString()}/yr`
-                            : `+$${addon.price}/mo`}
-                        </span>
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
-
-                {!activeBundle && selectedAddons.length === 0 && (
-                  <p className="text-white/20 text-xs italic pt-1">
-                    Select add-ons or a bundle above to see them here.
-                  </p>
-                )}
-              </div>
-
               <div className="border-t border-white/8 pt-5">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div>
-                    <p className="text-white/40 text-xs mb-1">
-                      {isAnnual ? "Annual total (billed once)" : "Monthly recurring"}
-                    </p>
+                    <p className="text-white/40 text-xs mb-1">Monthly recurring</p>
                     <motion.div
-                      key={displayTotal}
+                      key={monthlyTotal}
                       initial={{ scale: 1.05 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.15 }}
                       className="text-4xl font-black gradient-text"
                     >
-                      ${displayTotal.toLocaleString()}{isAnnual ? "/yr" : "/mo"}
+                      ${monthlyTotal}/mo
                     </motion.div>
-
-                    <AnimatePresence>
-                      {isAnnual && totalSavings > 0 && (
-                        <motion.p
-                          key="savings"
-                          initial={{ opacity: 0, y: 4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 4 }}
-                          transition={{ duration: 0.18 }}
-                          className="text-xs font-semibold mt-1.5"
-                          style={{ color: "#4ade80" }}
-                        >
-                          You save ${totalSavings.toLocaleString()} vs. monthly billing
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
                   </div>
 
                   <button
@@ -553,6 +300,46 @@ export default function Pricing() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Seasonal option — informational only, alternate path for winter-only businesses */}
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2 text-center">seasonal option (winter delivery businesses only)</p>
+            <h3 className="display-font text-xl font-bold text-white mb-2 text-center">Only Deliver in the Cold Months?</h3>
+            <p className="text-white/40 text-sm text-center max-w-xl mx-auto mb-7">
+              If your business is winter-only, you can run the base site on a seasonal
+              rate instead of the standard Website Plan above. This is an alternate path,
+              not the default — most clients run the Website Plan or Ordering Machine
+              year-round.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className={`${cardBase} p-6`} style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
+                <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white/60 inline-block mb-3"
+                  style={{ background: "rgba(255,255,255,0.06)" }}>
+                  Sep – Mar
+                </span>
+                <h4 className="text-white font-bold text-base mb-2">Full Service</h4>
+                <p className="text-white/40 text-xs leading-relaxed mb-4">
+                  Active lead generation during your busy months.
+                </p>
+                <div className="text-2xl font-black text-white/80">${BASE_PRICE}<span className="text-white/40 text-sm font-normal">/mo</span></div>
+              </div>
+              <div className={`${cardBase} p-6`} style={{ borderColor: "rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
+                <span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full text-white/60 inline-block mb-3"
+                  style={{ background: "rgba(255,255,255,0.06)" }}>
+                  Apr – Aug
+                </span>
+                <h4 className="text-white font-bold text-base mb-2">Off-Season Maintenance</h4>
+                <p className="text-white/40 text-xs leading-relaxed mb-4">
+                  Your site stays live and ready for when the cold comes back.
+                </p>
+                <div className="text-2xl font-black text-white/80">${OFF_SEASON_PRICE}<span className="text-white/40 text-sm font-normal">/mo</span></div>
+              </div>
+            </div>
+            <p className="text-white/20 text-xs text-center mt-4">
+              Want to talk through the seasonal option? <a href="/contact" className="text-[#b0271a] hover:text-[#c9432c] underline underline-offset-2 transition-colors">Get in touch</a> and we&apos;ll set it up.
+            </p>
           </div>
 
         </div>
@@ -599,55 +386,26 @@ export default function Pricing() {
                 </div>
 
                 <div className="rounded-xl p-4 mb-6 space-y-2" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                  {isAnnual && (
-                    <div className="flex justify-end mb-1">
-                      <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full"
-                        style={{ background: "rgba(34,197,94,0.12)", color: "#4ade80" }}>
-                        Annual — 25% off
-                      </span>
-                    </div>
-                  )}
                   <div className="flex justify-between text-sm">
-                    <span className="text-white/50">Firewood Business Website (Full Service)</span>
-                    <span className="text-white">
-                      {isAnnual ? `$${toAnnual(BASE_PRICE).toLocaleString()}/yr` : `$${BASE_PRICE}/mo`}
-                    </span>
+                    <span className="text-white/50">Website Plan</span>
+                    <span className="text-white">${BASE_PRICE}/mo</span>
                   </div>
-                  {activeBundle && (
-                    <div className="flex justify-between text-sm">
-                      <span className="text-white/50">{activeBundle.name}</span>
-                      <span className="text-white">
-                        {isAnnual
-                          ? `+$${toAnnual(activeBundle.bundlePrice).toLocaleString()}/yr`
-                          : `+$${activeBundle.bundlePrice}/mo`}
-                      </span>
-                    </div>
-                  )}
-                  {selectedAddons.map((id) => {
-                    const a = ADDONS.find((a) => a.id === id);
-                    if (!a) return null;
-                    return (
-                      <div key={id} className="flex justify-between text-sm">
-                        <span className="text-white/50">{a.name}</span>
-                        <span className="text-white">
-                          {isAnnual ? `+$${toAnnual(a.price).toLocaleString()}/yr` : `+$${a.price}/mo`}
-                        </span>
+                  {addOrderingMachine && (
+                    <>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-white/50">The Ordering Machine</span>
+                        <span className="text-white">+${ORDERING_MACHINE_PRICE}/mo</span>
                       </div>
-                    );
-                  })}
-                  <div className="border-t border-white/8 pt-2 mt-1 flex justify-between">
-                    <span className="text-white/40 text-xs">
-                      {isAnnual ? "Annual total" : "Monthly total"}
-                    </span>
-                    <span className="font-black gradient-text">
-                      ${displayTotal.toLocaleString()}{isAnnual ? "/yr" : "/mo"}
-                    </span>
-                  </div>
-                  {isAnnual && totalSavings > 0 && (
-                    <p className="text-xs font-semibold text-right" style={{ color: "#4ade80" }}>
-                      Saving ${totalSavings.toLocaleString()} vs. monthly
-                    </p>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-white/50">One-time setup fee</span>
+                        <span className="text-white">${ORDERING_MACHINE_SETUP_FEE}</span>
+                      </div>
+                    </>
                   )}
+                  <div className="border-t border-white/8 pt-2 mt-1 flex justify-between">
+                    <span className="text-white/40 text-xs">Monthly total</span>
+                    <span className="font-black gradient-text">${monthlyTotal}/mo</span>
+                  </div>
                 </div>
 
                 <form onSubmit={handleCheckout} className="space-y-4">
@@ -693,11 +451,20 @@ export default function Pricing() {
                       </div>
                     </div>
                     <span className="text-xs text-white/50 leading-relaxed select-none">
-                      I authorize Firewood Website to charge my card{" "}
-                      <span className="text-white font-semibold">
-                        ${displayTotal.toLocaleString()}{isAnnual ? "/yr" : "/mo"}
-                      </span>{" "}
-                      starting 30 days after my site goes live. I understand I can cancel anytime.
+                      {addOrderingMachine ? (
+                        <>
+                          I authorize Firewood Website to charge my card{" "}
+                          <span className="text-white font-semibold">${ORDERING_MACHINE_SETUP_FEE} today</span> for
+                          setup, and <span className="text-white font-semibold">${monthlyTotal}/mo</span>{" "}
+                          starting 30 days after my site goes live. I understand I can cancel anytime.
+                        </>
+                      ) : (
+                        <>
+                          I authorize Firewood Website to charge my card{" "}
+                          <span className="text-white font-semibold">${monthlyTotal}/mo</span> starting 30 days
+                          after my site goes live. I understand I can cancel anytime.
+                        </>
+                      )}
                     </span>
                   </label>
 
@@ -743,7 +510,7 @@ export default function Pricing() {
                         background: authChecked && tosChecked
                           ? "linear-gradient(135deg, #8b1a0f, #c9432c)"
                           : "rgba(255,255,255,0.07)",
-                        color: authChecked && tosChecked ? "#000" : "rgba(255,255,255,0.2)",
+                        color: authChecked && tosChecked ? "#fff" : "rgba(255,255,255,0.2)",
                         boxShadow: authChecked && tosChecked ? "0 0 24px rgba(139,26,15,0.3)" : "none",
                       }}
                     >
@@ -760,7 +527,7 @@ export default function Pricing() {
                   </div>
 
                   <p className="text-center text-white/25 text-xs">
-                    Cancel anytime. No long-term contracts. No setup fees.
+                    Cancel anytime. No long-term contracts.
                   </p>
                 </form>
               </div>
@@ -811,15 +578,15 @@ export default function Pricing() {
                 {[
                   {
                     title: "1. Agreement & Services",
-                    body: "These Terms govern website design, hosting, and maintenance services provided by Firewood Website, a HouseCall Webs company.",
+                    body: "These Terms govern website design, hosting, ordering-system, and maintenance services provided by Firewood Website, a HouseCall Webs company.",
                   },
                   {
                     title: "2. Ownership & Hosting",
                     body: "All websites remain property of Firewood Website until the client exercises a full buyout. Monthly service includes hosting, security updates, and maintenance.",
                   },
                   {
-                    title: "3. Monthly Billing",
-                    body: "You authorize recurring monthly charges. Billing begins 30 days after site launch. Cancel anytime.",
+                    title: "3. Billing",
+                    body: "You authorize the one-time setup fee (if applicable) today, and recurring monthly charges beginning 30 days after site launch. Cancel anytime.",
                   },
                   {
                     title: "4. Site Buyout",
@@ -827,18 +594,22 @@ export default function Pricing() {
                   },
                   {
                     title: "5. Cancellation",
-                    body: "Cancel anytime. Hosting and support end at the close of the paid period. No refunds for partial months.",
+                    body: "Cancel anytime. Hosting and support end at the close of the paid period. No refunds for partial months. Setup fees are non-refundable once work has begun.",
                   },
                   {
                     title: "6. Acceptable Use",
                     body: "You agree not to use the website for illegal activities or prohibited content.",
                   },
                   {
-                    title: "7. Limitation of Liability",
+                    title: "7. SMS & Automation Features",
+                    body: "SMS automation, the Fall Reorder Engine, and related texting features require the client to be a registered business (EIN) due to carrier and regulatory requirements for automated texting.",
+                  },
+                  {
+                    title: "8. Limitation of Liability",
                     body: "Firewood Website's liability shall not exceed the amount paid in the last 12 months.",
                   },
                   {
-                    title: "8. Governing Law",
+                    title: "9. Governing Law",
                     body: "Governed by the laws of the State of California.",
                   },
                 ].map((s) => (

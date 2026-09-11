@@ -11,13 +11,17 @@ export async function POST(req: Request) {
   }
   const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const { name, business, phone, bestTime, deliveryArea, message } = await req.json();
+  // currentWebsite and email are captured here specifically so a future
+  // workflow can send personalized video outreach to each lead — not wired
+  // up yet, this route only emails the team. internalNote is a hidden,
+  // not-user-facing field reserved for internal lead tagging later.
+  const { name, business, phone, email, currentWebsite, cordsPerSeason, internalNote } = await req.json();
 
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px;background:#f9fafb;border-radius:12px;">
       <div style="background:linear-gradient(135deg,#8b1a0f,#b0271a);padding:24px 32px;border-radius:8px 8px 0 0;">
-        <h1 style="color:#000;margin:0;font-size:20px;font-weight:900;">
-          🔥 New Quote Request — Firewood Website
+        <h1 style="color:#fff;margin:0;font-size:20px;font-weight:900;">
+          🔥 New Ordering Demo Request — Firewood Website
         </h1>
       </div>
       <div style="background:#ffffff;padding:32px;border-radius:0 0 8px 8px;border:1px solid #e5e7eb;">
@@ -35,27 +39,31 @@ export async function POST(req: Request) {
             <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#111827;font-size:15px;font-weight:600;">${phone}</td>
           </tr>
           <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Best Time to Call</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#111827;font-size:15px;">${bestTime}</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Email</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#111827;font-size:15px;">${email}</td>
           </tr>
           <tr>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Delivery Area</td>
-            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#111827;font-size:15px;">${deliveryArea}</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Current Website</td>
+            <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;color:#111827;font-size:15px;">${currentWebsite || "None"}</td>
           </tr>
-          ${message ? `
           <tr>
-            <td style="padding:10px 0;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;vertical-align:top;padding-top:14px;">Message</td>
-            <td style="padding:10px 0;color:#111827;font-size:15px;padding-top:14px;">${message}</td>
+            <td style="padding:10px 0;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Cords per Season</td>
+            <td style="padding:10px 0;color:#111827;font-size:15px;">${cordsPerSeason}</td>
+          </tr>
+          ${internalNote ? `
+          <tr>
+            <td style="padding:10px 0;color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;vertical-align:top;padding-top:14px;">Internal Note</td>
+            <td style="padding:10px 0;color:#111827;font-size:15px;padding-top:14px;">${internalNote}</td>
           </tr>` : ""}
         </table>
         <div style="margin-top:28px;padding:16px;background:#fff7ed;border-radius:8px;border-left:4px solid #8b1a0f;">
           <p style="margin:0;color:#92400e;font-size:13px;">
-            📞 <strong>Action required:</strong> Follow up with ${name} at <strong>${phone}</strong> — best time: ${bestTime}.
+            📞 <strong>Action required:</strong> Follow up with ${name} at <strong>${phone}</strong> (${email}).
           </p>
         </div>
       </div>
       <p style="text-align:center;color:#9ca3af;font-size:12px;margin-top:20px;">
-        Sent from the Firewood Website contact form
+        Sent from the Firewood Website intake form
       </p>
     </div>
   `;
@@ -64,7 +72,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: FROM_ADDRESS,
       to: TO_ADDRESS,
-      subject: `New Quote Request — ${name} (${business})`,
+      subject: `New Ordering Demo Request — ${name} (${business})`,
       html,
     });
 

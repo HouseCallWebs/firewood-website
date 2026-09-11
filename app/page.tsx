@@ -2,6 +2,7 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import TrustBar from "./components/TrustBar";
 import Problem from "./components/Problem";
+import FallReorderEngine from "./components/FallReorderEngine";
 import HowItWorks from "./components/HowItWorks";
 import Portfolio from "./components/Portfolio";
 import PricingBanner from "./components/PricingBanner";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <Problem />
+      <FallReorderEngine />
       <HowItWorks />
       <Portfolio />
       <PricingBanner />
