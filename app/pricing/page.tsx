@@ -28,6 +28,7 @@ export default function Pricing() {
   const [modalErrors, setModalErrors] = useState<{ name?: string; email?: string }>({});
   const [authChecked, setAuthChecked] = useState(false);
   const [tosChecked, setTosChecked] = useState(false);
+  const [agreementError, setAgreementError] = useState("");
   const [tosDrawerOpen, setTosDrawerOpen] = useState(false);
 
   const monthlyTotal = addOrderingMachine ? BUNDLE_TOTAL : BASE_PRICE;
@@ -38,6 +39,12 @@ export default function Pricing() {
     if (!modalName.trim()) errs.name = "This field is required.";
     if (!modalEmail.trim()) errs.email = "This field is required.";
     if (Object.keys(errs).length) { setModalErrors(errs); return; }
+
+    if (!authChecked || !tosChecked) {
+      setAgreementError("Please check both boxes above to continue.");
+      return;
+    }
+    setAgreementError("");
 
     setModalStatus("loading");
     try {
@@ -354,7 +361,7 @@ export default function Pricing() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => { setModalOpen(false); setModalStatus("idle"); setAuthChecked(false); setTosChecked(false); }}
+              onClick={() => { setModalOpen(false); setModalStatus("idle"); setAuthChecked(false); setTosChecked(false); setAgreementError(""); }}
               className="fixed inset-0 z-50"
               style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
             />
@@ -376,7 +383,7 @@ export default function Pricing() {
                     <p className="text-white/40 text-sm">We&apos;ll get you set up right away.</p>
                   </div>
                   <button
-                    onClick={() => { setModalOpen(false); setModalStatus("idle"); setAuthChecked(false); setTosChecked(false); }}
+                    onClick={() => { setModalOpen(false); setModalStatus("idle"); setAuthChecked(false); setTosChecked(false); setAgreementError(""); }}
                     className="text-white/30 hover:text-white transition-colors mt-0.5"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -437,7 +444,7 @@ export default function Pricing() {
                   <label className="flex items-start gap-3 cursor-pointer group">
                     <div className="relative flex-shrink-0 mt-0.5">
                       <input type="checkbox" checked={authChecked}
-                        onChange={(e) => setAuthChecked(e.target.checked)} className="sr-only" />
+                        onChange={(e) => { setAuthChecked(e.target.checked); setAgreementError(""); }} className="sr-only" />
                       <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-150 ${
                         authChecked
                           ? "border-[#b0271a] bg-[#b0271a]"
@@ -471,7 +478,7 @@ export default function Pricing() {
                   <label className="flex items-start gap-3 cursor-pointer group">
                     <div className="relative flex-shrink-0 mt-0.5">
                       <input type="checkbox" checked={tosChecked}
-                        onChange={(e) => setTosChecked(e.target.checked)} className="sr-only" />
+                        onChange={(e) => { setTosChecked(e.target.checked); setAgreementError(""); }} className="sr-only" />
                       <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-150 ${
                         tosChecked
                           ? "border-[#b0271a] bg-[#b0271a]"
@@ -497,34 +504,25 @@ export default function Pricing() {
                     </span>
                   </label>
 
+                  {agreementError && (
+                    <p className="text-red-400 text-xs text-center">{agreementError}</p>
+                  )}
+
                   {modalStatus === "error" && (
                     <p className="text-red-400 text-xs text-center">Something went wrong. Please try again.</p>
                   )}
 
-                  <div className="relative group/btn">
-                    <button
-                      type="submit"
-                      disabled={modalStatus === "loading" || !authChecked || !tosChecked}
-                      className="w-full py-4 rounded-xl font-bold text-base transition-all duration-200 disabled:cursor-not-allowed"
-                      style={{
-                        background: authChecked && tosChecked
-                          ? "linear-gradient(135deg, #8b1a0f, #c9432c)"
-                          : "rgba(255,255,255,0.07)",
-                        color: authChecked && tosChecked ? "#fff" : "rgba(255,255,255,0.2)",
-                        boxShadow: authChecked && tosChecked ? "0 0 24px rgba(139,26,15,0.3)" : "none",
-                      }}
-                    >
-                      {modalStatus === "loading" ? "Processing…" : "Proceed to Payment →"}
-                    </button>
-                    {(!authChecked || !tosChecked) && (
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white whitespace-nowrap opacity-0 group-hover/btn:opacity-100 transition-opacity pointer-events-none"
-                        style={{ background: "rgba(10,15,28,0.97)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                        Please accept the terms above
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0"
-                          style={{ borderLeft: "5px solid transparent", borderRight: "5px solid transparent", borderTop: "5px solid rgba(10,15,28,0.97)" }} />
-                      </div>
-                    )}
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={modalStatus === "loading"}
+                    className="w-full py-4 rounded-xl font-bold text-base text-white transition-all duration-200 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+                    style={{
+                      background: "linear-gradient(135deg, #8b1a0f, #c9432c)",
+                      boxShadow: "0 0 24px rgba(139,26,15,0.3)",
+                    }}
+                  >
+                    {modalStatus === "loading" ? "Processing…" : "Proceed to Payment →"}
+                  </button>
 
                   <p className="text-center text-white/25 text-xs">
                     Cancel anytime. No long-term contracts.
