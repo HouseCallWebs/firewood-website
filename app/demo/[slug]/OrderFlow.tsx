@@ -6,16 +6,14 @@ import PhoneMockup, { type ThreadMessage } from "./components/PhoneMockup";
 
 const ROOT_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://firewoodwebsite.com";
 
-// ── Wood species pricing — the wildcard demo's own established prices, kept
-// as-is. Half/face-cord prices aren't a strict fraction of the full-cord
-// price — smaller loads still cost nearly as much to deliver, so they carry
-// a higher per-cord rate. These ratios mirror the ones used on the Big Sky
-// Firewood flagship demo's order flow, so both share the same pricing logic. ─
+// ── Wood species pricing — unified with the Big Sky Firewood flagship demo
+// (app/demo/bigsky/lib/data.ts) so the same species costs the same amount on
+// every demo instead of two arbitrary, coincidentally-different price lists.
 const SPECIES = [
-  { id: "oak", name: "Oak", fullPrice: 350, desc: "Hottest burn, longest lasting" },
-  { id: "pine", name: "Pine", fullPrice: 220, desc: "Lights easy, great kindling" },
-  { id: "cedar", name: "Cedar", fullPrice: 300, desc: "Pleasant smell, steady heat" },
-  { id: "mix", name: "Mix", desc: "Mixed hardwood — best value all-rounder", fullPrice: 275 },
+  { id: "oak", name: "Oak", fullPrice: 329, desc: "Hottest burn, longest lasting" },
+  { id: "almond", name: "Almond", fullPrice: 299, desc: "Sweet smell, great heat" },
+  { id: "mixed", name: "Mixed Hardwood", fullPrice: 269, desc: "Best value all-rounder" },
+  { id: "fir", name: "Douglas Fir", fullPrice: 219, desc: "Lights easy, great kindling" },
 ] as const;
 
 type QuantityId = "full" | "half" | "face";
@@ -41,6 +39,11 @@ const ADDONS = [
 
 const DEPOSIT_RATE = 0.2;
 const HOME_REGION = "the Millbrook area";
+// Generic placeholder service area — consistent with the fictional towns
+// used elsewhere on this demo (Millbrook, Fairview, Cedar Grove). Any ZIP
+// outside this small set fails the check, same real pass/fail behavior as
+// the Big Sky flagship demo.
+const VALID_ZIPS = ["55401", "55402", "55403", "55404", "55408"];
 const TIME_SLOTS = ["8–11am", "11am–2pm", "2–5pm"];
 
 function upcomingDates(n: number) {
@@ -81,6 +84,7 @@ export default function OrderFlow({ businessName }: { businessName: string }) {
 
   const species = SPECIES.find((s) => s.id === speciesId) ?? SPECIES[0];
   const woodPrice = priceFor(species.fullPrice, quantity);
+  const zipValid = mode === "delivery" && zip.length === 5 ? VALID_ZIPS.includes(zip) : null;
   const addonsTotal = addonIds.reduce((sum, id) => {
     const a = ADDONS.find((x) => x.id === id);
     return sum + (a?.price ?? 0);
@@ -258,7 +262,7 @@ export default function OrderFlow({ businessName }: { businessName: string }) {
                         maxLength={5}
                         value={zip}
                         onChange={(e) => setZip(e.target.value.replace(/\D/g, "").slice(0, 5))}
-                        placeholder="e.g. 65801"
+                        placeholder="e.g. 55401"
                         className="w-full rounded-xl px-4 py-3 text-white text-sm placeholder-white/20 border border-white/8 focus:outline-none focus:border-[#8b1a0f]/50 transition-colors"
                         style={{ background: "rgba(255,255,255,0.05)" }}
                       />
@@ -268,9 +272,14 @@ export default function OrderFlow({ businessName }: { businessName: string }) {
                             initial={{ opacity: 0, y: -6 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -6 }}
-                            className="text-sm font-semibold text-green-400 mt-3"
+                            className="text-sm font-semibold mt-3"
+                            style={{ color: zipValid ? "#4ade80" : "#f87171" }}
                           >
-                            ✓ Delivering within our service area of {zip}
+                            {zipValid ? (
+                              <>✓ Delivering within our service area of {zip}</>
+                            ) : (
+                              <>Sorry, that ZIP is outside our delivery radius. Try pickup instead.</>
+                            )}
                           </motion.p>
                         )}
                       </AnimatePresence>
