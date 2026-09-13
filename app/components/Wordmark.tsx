@@ -1,8 +1,9 @@
-// The Firewood Website brand's own signature-style wordmark — separate from
-// the client business logos used on /demo pages (see
-// app/demo/[slug]/components/Logo.tsx, which stays a bold crossed-axes mark).
-// Built as a single scalable SVG: a small ember accent beside a script
-// wordmark, so it works small in the header and large as a standalone mark.
+// The Firewood Website brand's own logo lockup — separate from the client
+// business logos used on /demo pages (see app/demo/[slug]/components/Logo.tsx
+// and app/demo/bigsky/components/Logo.tsx, which stay their own marks).
+// A single scalable SVG: a geometric axe-head icon beside a bold condensed
+// wordmark, sized off one viewBox so it holds up from favicon-small header
+// use up to a large standalone mark.
 export default function Wordmark({ className }: { className?: string }) {
   return (
     <svg
@@ -12,25 +13,33 @@ export default function Wordmark({ className }: { className?: string }) {
       role="img"
       aria-label="Firewood Website"
     >
+      {/* Axe head: an angular wedge (flat poll, single curved cutting edge) on a short diagonal handle. */}
       <path
-        d="M20 6c1.3 4.3-3.3 5.8-3.3 10.3 0 2.4 1.8 4 3.7 4s3.6-1.4 3.6-3.4c0-1.2-.6-2.2-1.3-2.9.8 1.9 3.4 3.1 3.4 6.4 0 4.1-3 6.9-6.8 6.9S12.5 25 12.5 20.8c0-5.8 4.6-7 5.9-14.8z"
-        fill="url(#wordmarkFlame)"
+        d="M14 52 L28 27"
+        stroke="#b0271a"
+        strokeWidth="7"
+        strokeLinecap="round"
+      />
+      <path
+        d="M28 27
+           L 25 8
+           L 55 17
+           Q 45 24 28 27
+           Z"
+        fill="#b0271a"
       />
       <text
-        x="34"
-        y="40"
-        fontFamily="var(--font-script), cursive"
-        fontSize="38"
+        x="62"
+        y="41"
+        fontFamily="var(--font-wordmark), 'Arial Narrow', sans-serif"
+        fontWeight={700}
+        fontSize="30"
+        textLength="224"
+        lengthAdjust="spacingAndGlyphs"
         fill="#f5ede4"
       >
-        Firewood Website
+        FIREWOOD WEBSITE
       </text>
-      <defs>
-        <linearGradient id="wordmarkFlame" x1="12" y1="6" x2="26" y2="27" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#c9432c" />
-          <stop offset="1" stopColor="#8b1a0f" />
-        </linearGradient>
-      </defs>
     </svg>
   );
 }

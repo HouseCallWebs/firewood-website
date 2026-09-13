@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, Pinyon_Script } from "next/font/google";
+import { Fraunces, Inter, Oswald } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const display = Fraunces({ variable: "--font-display", subsets: ["latin"], weight: ["600", "700", "900"] });
 const body = Inter({ variable: "--font-body", subsets: ["latin"] });
-// Signature-style script used only for the site's own wordmark logo (see
+// Bold condensed sans used only for the site's own wordmark logo (see
 // app/components/Wordmark.tsx) — not used for body/heading copy.
-const script = Pinyon_Script({ variable: "--font-script", subsets: ["latin"], weight: "400" });
+const wordmark = Oswald({ variable: "--font-wordmark", subsets: ["latin"], weight: ["700"] });
 
 export const metadata: Metadata = {
   title: "Firewood Website — Websites Built for Firewood Delivery Businesses",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${script.variable}`}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${wordmark.variable}`}>
       <body>
         {children}
         <Analytics />
