@@ -67,7 +67,7 @@ export async function POST(req: Request) {
       checkoutOptions: {
         askForShippingAddress: false,
         redirectUrl: `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://firewoodwebsite.com"}/confirmation`,
-        merchantSupportEmail: "hello@housecallwebs.com",
+        merchantSupportEmail: "hello@firewoodwebsite.com",
       },
       prePopulatedData: {
         buyerEmail: customerEmail,

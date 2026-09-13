@@ -576,7 +576,7 @@ export default function Pricing() {
                 {[
                   {
                     title: "1. Agreement & Services",
-                    body: "These Terms govern website design, hosting, ordering-system, and maintenance services provided by Firewood Website, a HouseCall Webs company.",
+                    body: "These Terms govern website design, hosting, ordering-system, and maintenance services provided by Firewood Website.",
                   },
                   {
                     title: "2. Ownership & Hosting",

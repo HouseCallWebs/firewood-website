@@ -204,7 +204,7 @@ export default function FinalCTA() {
 
                 {status === "error" && (
                   <p className="text-red-400 text-xs text-center">
-                    Something went wrong. Please try again or email us directly at hello@housecallwebs.com
+                    Something went wrong. Please try again or email us directly at hello@firewoodwebsite.com
                   </p>
                 )}
 

@@ -14,7 +14,6 @@ const cols = [
   {
     title: "Company",
     links: [
-      { label: "Our Work", href: "/#portfolio" },
       { label: "How It Works", href: "/#how-it-works" },
       { label: "Pricing", href: "/pricing" },
       { label: "Contact", href: "/contact" },
@@ -33,10 +32,10 @@ export default function Footer() {
             </Link>
             <p className="text-white/30 text-sm leading-relaxed max-w-xs mb-6">
               Premium, high-converting websites built exclusively for firewood
-              delivery and cordwood businesses across the USA. A HouseCall Webs company.
+              delivery and cordwood businesses across the USA.
             </p>
             <div className="flex flex-col gap-2 text-sm text-white/30">
-              <span>📧 hello@housecallwebs.com</span>
+              <span>📧 hello@firewoodwebsite.com</span>
               <span>🇺🇸 Built in the USA</span>
             </div>
           </div>

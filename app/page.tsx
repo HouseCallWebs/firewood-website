@@ -4,7 +4,6 @@ import TrustBar from "./components/TrustBar";
 import Problem from "./components/Problem";
 import FallReorderEngine from "./components/FallReorderEngine";
 import HowItWorks from "./components/HowItWorks";
-import Portfolio from "./components/Portfolio";
 import PricingBanner from "./components/PricingBanner";
 import WhyUs from "./components/WhyUs";
 import AIReceptionistPitch from "./components/AIReceptionistPitch";
@@ -20,7 +19,6 @@ export default function Home() {
       <Problem />
       <FallReorderEngine />
       <HowItWorks />
-      <Portfolio />
       <PricingBanner />
       <WhyUs />
       <AIReceptionistPitch />

@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 const sections = [
   {
     title: "1. Agreement & Services",
-    body: "These Terms govern website design, hosting, and maintenance services provided by Firewood Website, a HouseCall Webs company.",
+    body: "These Terms govern website design, hosting, and maintenance services provided by Firewood Website.",
   },
   {
     title: "2. Ownership & Hosting",
@@ -79,9 +79,9 @@ export default function TermsPage() {
           <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-white/25 text-xs">
               Questions? Email us at{" "}
-              <a href="mailto:hello@housecallwebs.com"
+              <a href="mailto:hello@firewoodwebsite.com"
                 className="text-[#b0271a] hover:text-[#c9432c] transition-colors underline underline-offset-2">
-                hello@housecallwebs.com
+                hello@firewoodwebsite.com
               </a>
             </p>
             <Link
