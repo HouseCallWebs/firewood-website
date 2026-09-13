@@ -1,18 +1,29 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { MenuIcon, CloseIcon } from "./icons";
 
-const navLinks = [
-  { label: "Pricing", href: "#pricing" },
-  { label: "Delivery Area", href: "#delivery" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
+const sectionLinks = [
+  { label: "Pricing", section: "pricing" },
+  { label: "Delivery Area", section: "delivery" },
+  { label: "Reviews", section: "reviews" },
+  { label: "FAQ", section: "faq" },
 ];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  // These links point at sections that only exist on the homepage. A bare
+  // "#pricing" only works if you're already on /demo/bigsky — from any other
+  // page (e.g. /order) it silently does nothing, since the browser has
+  // nothing to scroll to. Prefix with the homepage path everywhere else.
+  const onHomepage = pathname === "/demo/bigsky";
+  const navLinks = sectionLinks.map((l) => ({
+    label: l.label,
+    href: onHomepage ? `#${l.section}` : `/demo/bigsky#${l.section}`,
+  }));
 
   return (
     <header

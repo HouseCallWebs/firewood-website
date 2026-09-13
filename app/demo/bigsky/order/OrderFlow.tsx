@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { CheckIcon, PinIcon, LogIcon } from "../components/icons";
+import { CheckIcon, PinIcon, LogIcon, CloseIcon } from "../components/icons";
 import PhoneMockup, { type ThreadMessage } from "./components/PhoneMockup";
 import {
   SPECIES,
@@ -136,15 +136,25 @@ export default function OrderFlow() {
         <div className="max-w-xl mx-auto">
           {step < 8 && (
             <>
-              <div className="flex items-center gap-1 mb-2">
-                {STEP_LABELS.slice(0, 7).map((label, i) => {
-                  const n = i + 1;
-                  const active = n === step;
-                  const done = n < step;
-                  return (
-                    <div key={label} className="flex-1 h-1.5 rounded-full" style={{ background: done || active ? "#f59e0b" : "rgba(250,246,240,0.1)" }} />
-                  );
-                })}
+              <div className="flex items-center justify-between gap-4 mb-3">
+                <Link
+                  href="/demo/bigsky"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold flex-shrink-0"
+                  style={{ color: "rgba(250,246,240,0.45)" }}
+                >
+                  <CloseIcon className="w-3.5 h-3.5" />
+                  Exit
+                </Link>
+                <div className="flex items-center gap-1 flex-1">
+                  {STEP_LABELS.slice(0, 7).map((label, i) => {
+                    const n = i + 1;
+                    const active = n === step;
+                    const done = n < step;
+                    return (
+                      <div key={label} className="flex-1 h-1.5 rounded-full" style={{ background: done || active ? "#f59e0b" : "rgba(250,246,240,0.1)" }} />
+                    );
+                  })}
+                </div>
               </div>
               <p className="text-xs font-bold mb-6" style={{ color: "rgba(250,246,240,0.4)" }}>
                 Step {step} of 7 — {STEP_LABELS[step - 1]}
@@ -480,13 +490,20 @@ export default function OrderFlow() {
                       <PhoneMockup contactName="Big Sky Firewood" messages={reorderMessages} startDelay={confirmationMessages.length * 0.55 + 0.4} />
                     </div>
 
-                    <div className="mt-10">
+                    <div className="mt-10 flex flex-col items-center gap-4">
                       <Link
                         href="/"
                         className="inline-flex items-center justify-center px-8 py-4 rounded-lg text-base font-black tracking-tight transition-transform hover:scale-105"
                         style={{ background: "#f59e0b", color: "#1a1512" }}
                       >
                         This Could Be Your Business →
+                      </Link>
+                      <Link
+                        href="/demo/bigsky"
+                        className="text-sm font-bold"
+                        style={{ color: "rgba(250,246,240,0.45)" }}
+                      >
+                        ← Back to Big Sky Firewood
                       </Link>
                     </div>
                   </div>

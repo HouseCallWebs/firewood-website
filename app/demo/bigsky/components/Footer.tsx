@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Logo from "./Logo";
 import { PhoneIcon, PinIcon } from "./icons";
 import { BUSINESS_PHONE, BUSINESS_CITY, PICKUP_YARD } from "../lib/data";
@@ -25,8 +26,11 @@ export default function Footer() {
             <span style={{ color: "rgba(250,246,240,0.4)" }}>{BUSINESS_CITY}</span>
           </div>
         </div>
-        <div className="pt-6 border-t text-xs" style={{ borderColor: "rgba(250,246,240,0.08)", color: "rgba(250,246,240,0.3)" }}>
-          This is a fictional demo storefront built to showcase an ordering system for firewood delivery businesses.
+        <div className="pt-6 border-t text-xs flex flex-wrap items-center gap-x-2 gap-y-1" style={{ borderColor: "rgba(250,246,240,0.08)", color: "rgba(250,246,240,0.3)" }}>
+          <span>This is a fictional demo storefront built to showcase an ordering system for firewood delivery businesses.</span>
+          <Link href="/" className="underline underline-offset-2 hover:text-[#f59e0b] transition-colors" style={{ color: "rgba(250,246,240,0.45)" }}>
+            See Firewood Website →
+          </Link>
         </div>
       </div>
     </footer>
